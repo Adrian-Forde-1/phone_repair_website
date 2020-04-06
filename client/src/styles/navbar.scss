@@ -1,0 +1,237 @@
+$purple-color: #c314cc;
+$pink-color: #ff40b1;
+$blue-color: #14cca7;
+$green-color: #00ff3b;
+$darker-blue-color: #1f91cc;
+
+// Navbar Start
+.navbar {
+  position: absolute;
+  top: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 65px;
+  width: 100%;
+  padding: 0 10vw;
+  color: black;
+  z-index: 1000;
+  // background: linear-gradient(90deg, $blue-color, $darker-blue-color);
+  background-size: 100%;
+
+  a,
+  button {
+    color: inherit;
+    text-transform: uppercase;
+    font-size: 1rem;
+  }
+
+  .nav {
+    display: flex;
+    list-style: none;
+
+    .nav-link {
+      a,
+      button {
+        margin: 0px 1rem;
+        padding-top: 1rem 0.5rem;
+        color: white;
+
+        &:hover {
+          color: $pink-color;
+        }
+      }
+    }
+  }
+
+  .nav-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  .menu-icon {
+    position: relative;
+    padding: 26px 10px;
+    cursor: pointer;
+    z-index: 1000;
+    display: none;
+
+    .line {
+      display: block;
+      position: relative;
+      background: #000;
+      height: 2px;
+      width: 20px;
+      border-radius: 4px;
+      transition: background 800ms ease;
+
+      &::before,
+      &::after {
+        content: '';
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        border-radius: 4px;
+        background: #000;
+        transition: background 800ms ease;
+      }
+
+      &::before {
+        transform: translateY(-5px);
+      }
+      &::after {
+        transform: translateY(5px);
+      }
+    }
+  }
+
+  .menu-btn {
+    display: none;
+  }
+}
+
+.logo {
+  height: 100%;
+  a {
+    display: block;
+    height: 80%;
+    margin: auto 0px;
+    img {
+      height: 100%;
+    }
+  }
+}
+
+// Navbar End
+
+@keyframes openTop {
+  0% {
+    transform: translateY(-5px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  100% {
+    transform: translateY(0px) rotate(90deg);
+  }
+}
+@keyframes closedTop {
+  0% {
+    transform: translateY(-5px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  100% {
+    transform: translateY(0px) rotate(90deg);
+  }
+}
+
+@keyframes openMid {
+  50% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(45deg);
+  }
+}
+@keyframes closedMid {
+  50% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(45deg);
+  }
+}
+
+@keyframes openBottom {
+  0% {
+    transform: translateY(5px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  100% {
+    transform: translateY(0px) rotate(90deg);
+  }
+}
+
+@keyframes closedBottom {
+  0% {
+    transform: translateY(5px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  100% {
+    transform: translateY(0px) rotate(90deg);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .navbar {
+    .menu-icon {
+      display: block;
+    }
+
+    .line {
+      animation: closedMid 800ms backwards;
+      animation-direction: reverse;
+
+      &::before {
+        animation: closedTop 800ms backwards;
+        animation-direction: reverse;
+      }
+      &::after {
+        animation: closedBottom 800ms backwards;
+        animation-direction: reverse;
+      }
+    }
+
+    .nav {
+      position: absolute;
+      top: 0;
+      left: 0;
+      opacity: 0;
+      flex-direction: column;
+      justify-content: space-evenly;
+      align-items: center;
+      padding: 10rem 0;
+      width: 100vw;
+      height: 100vh;
+      font-size: 2rem;
+      color: white;
+      background: rgba(0, 0, 0, 0.9);
+      transition: opacity 300ms 200ms, clip-path 500ms 200ms;
+      clip-path: circle(200px at top right);
+    }
+
+    .menu-btn:checked {
+      ~ .menu-icon {
+        .line {
+          background: #fff;
+          animation: openMid 800ms forwards;
+
+          &::before,
+          &::after {
+            background: #fff;
+          }
+
+          &::before {
+            animation: openTop 800ms forwards;
+          }
+
+          &::after {
+            animation: openBottom 800ms forwards;
+          }
+        }
+      }
+
+      ~ .nav {
+        opacity: 1;
+        clip-path: circle(100% at center);
+      }
+    }
+  }
+}

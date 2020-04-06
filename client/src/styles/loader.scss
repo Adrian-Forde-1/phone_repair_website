@@ -1,0 +1,55 @@
+$purple-color: #c314cc;
+$pink-color: #ff40b1;
+$blue-color: #14cca7;
+$green-color: #00ff3b;
+$darker-blue-color: #212d9a;
+$yellow-color: #faff00;
+
+.loading {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  background: rgba(255, 255, 255, 1);
+  //   background: rgba(0, 0, 0, 0.5);
+
+  > div {
+    width: 3rem;
+    height: 3rem;
+    background: linear-gradient(90deg, $darker-blue-color, $blue-color);
+    border-radius: 50%;
+    display: inline-block;
+    animation: 1500ms bounce infinite ease-in-out both;
+  }
+
+  .bounce {
+    background: linear-gradient(90deg, $blue-color, $pink-color);
+    animation-delay: -300ms;
+  }
+  .bounce2 {
+    background: linear-gradient(90deg, $pink-color, $darker-blue-color);
+    animation-delay: -150ms;
+  }
+}
+
+@keyframes bounce {
+  0%,
+  80%,
+  100% {
+    transform: scale(0);
+  }
+  40% {
+    transform: scale(1);
+  }
+  //   80% {
+
+  //   }
+  //   100% {
+
+  //   }
+}

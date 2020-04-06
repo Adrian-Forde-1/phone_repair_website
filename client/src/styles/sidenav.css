@@ -1,0 +1,208 @@
+.side-nav-opener {
+  height: 20px;
+  width: 50px;
+  color: white;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  position: absolute;
+  top: 20px;
+  padding: 15px 10px;
+  background: #14cca7;
+  cursor: pointer;
+  -webkit-box-shadow: 1px 0.5px 10px grey;
+          box-shadow: 1px 0.5px 10px grey;
+  -webkit-transition: -webkit-transform 300ms ease;
+  transition: -webkit-transform 300ms ease;
+  transition: transform 300ms ease;
+  transition: transform 300ms ease, -webkit-transform 300ms ease;
+}
+
+.side-nav-opener i {
+  font-size: 20px;
+  -webkit-transition: all 300ms;
+  transition: all 300ms;
+}
+
+.side-nav-opener.open {
+  -webkit-transform: translateX(200px);
+          transform: translateX(200px);
+}
+
+.side-nav-opener.open i {
+  -webkit-transform: rotate(180deg);
+          transform: rotate(180deg);
+}
+
+.side-nav {
+  height: 100%;
+  min-width: 75px;
+  max-width: auto;
+  background: -webkit-gradient(linear, left top, left bottom, from(#212d9a), to(#14cca7));
+  background: linear-gradient(#212d9a, #14cca7);
+  position: fixed;
+  left: 0;
+  top: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  z-index: 1000;
+  -webkit-transition: all 300ms ease;
+  transition: all 300ms ease;
+}
+
+.side-nav ul {
+  width: 100%;
+  height: 100%;
+  padding: 20px 0px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.side-nav ul li {
+  margin: 40px 0px;
+  list-style: none;
+  cursor: pointer;
+}
+
+.side-nav ul li:nth-of-type(1) {
+  margin: 10px 0px;
+  width: 100%;
+}
+
+.side-nav ul li:nth-of-type(1) a {
+  margin: 0 auto;
+  display: block;
+}
+
+.side-nav ul li:nth-of-type(1) a i {
+  width: 100%;
+  margin: 0 auto;
+  display: block;
+  text-align: center;
+}
+
+.side-nav ul li a,
+.side-nav ul li button {
+  height: 100%;
+  margin: 10px auto;
+}
+
+.side-nav ul li a {
+  text-decoration: none;
+}
+
+.side-nav ul li a i {
+  color: white;
+  font-size: 30px;
+}
+
+.side-nav ul li button {
+  width: 100%;
+  background: none;
+  padding: 0px 10px;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+}
+
+.side-nav ul li button p {
+  display: none;
+  visibility: visible;
+  opacity: 0;
+  color: white;
+  -webkit-transition: opacity 300ms;
+  transition: opacity 300ms;
+}
+
+.side-nav ul li button i {
+  color: white;
+  font-size: 30px;
+  margin-right: 10px;
+}
+
+.side-nav ul li button:hover {
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
+.side-nav ul hr {
+  border: 0.5px solid white;
+  margin: 10px 0px 20px 0px;
+  width: 100%;
+}
+
+.side-nav:hover {
+  width: 200px;
+}
+
+.side-nav:hover ul li {
+  width: 100%;
+}
+
+.side-nav:hover ul li:nth-of-type(1) {
+  width: auto;
+}
+
+.side-nav:hover ul li button i {
+  margin-left: 20px;
+}
+
+.side-nav:hover ul li button p {
+  display: block;
+  margin: auto;
+  visibility: visible;
+  opacity: 1;
+}
+
+@media screen and (max-width: 768px) {
+  .side-nav-opener {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
+  .side-nav {
+    -webkit-transform: translateX(-200px);
+            transform: translateX(-200px);
+    width: 200px;
+  }
+  .side-nav ul li {
+    width: 100%;
+  }
+  .side-nav ul li button i {
+    margin-left: 20px;
+  }
+  .side-nav ul li button p {
+    display: block;
+    margin: auto;
+    visibility: visible;
+    opacity: 1;
+  }
+  .side-nav.open {
+    -webkit-transform: translateX(0px);
+            transform: translateX(0px);
+  }
+}
+/*# sourceMappingURL=sidenav.css.map */
