@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
-import IPhoneXImg from '../resources/images/iphoneX-logo.png';
+import IPhoneXImg from '../resources/images/iphoneX-logo.svg';
 
 //react router dom
 import { Link } from 'react-router-dom';
@@ -33,9 +33,7 @@ function Navbar(props) {
     return (
       <nav className="navbar">
         <div className="logo">
-          <Link to="/">
-            <img src={IPhoneXImg} alt="" />
-          </Link>
+          <Link to="/">Cellphone Repairs</Link>
         </div>
 
         <input type="checkbox" className="menu-btn" id="menu-btn" />

@@ -259,17 +259,18 @@
 }
 
 .logo {
-  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .logo a {
-  display: block;
-  height: 80%;
-  margin: auto 0px;
-}
-
-.logo a img {
-  height: 100%;
+  font-weight: 400;
+  font-size: 20px;
+  color: white;
 }
 
 @keyframes openTop {
@@ -421,6 +422,13 @@
     opacity: 1;
     -webkit-clip-path: circle(100% at center);
             clip-path: circle(100% at center);
+  }
+}
+
+@media screen and (max-width: 850px) {
+  .nav-link a,
+  .nav-link button {
+    font-size: 12px;
   }
 }
 

@@ -13,6 +13,7 @@ import store from '../../redux/store';
 
 //Actions
 import { SET_MESSAGES } from '../../redux/actions/types';
+import { getAllDevices } from '../../redux/actions/deviceActions';
 
 class CreateRequest extends Component {
   constructor(props) {
@@ -34,18 +35,22 @@ class CreateRequest extends Component {
   }
 
   componentDidMount() {
-    this.setState({
-      device: this.props.devices[0].name,
-    });
-    axios
-      .get(`/user/${this.props.devices[0].name}/typeOfRepairs`, {
-        headers: { Authorization: localStorage.getItem('token') },
-      })
-      .then((response) => {
-        this.setState({
-          typeOfRepairs: [...response.data],
-        });
+    this.props.getAllDevices();
+    if (this.props.devices.length > 0) {
+      this.setState({
+        device: this.props.devices[0].name,
       });
+
+      axios
+        .get(`/user/${this.props.devices[0].name}/typeOfRepairs`, {
+          headers: { Authorization: localStorage.getItem('token') },
+        })
+        .then((response) => {
+          this.setState({
+            typeOfRepairs: [...response.data],
+          });
+        });
+    }
   }
 
   handleOnChange = (e) => {
@@ -209,10 +214,14 @@ class CreateRequest extends Component {
   }
 }
 
+const mapDispatchToProps = {
+  getAllDevices,
+};
+
 const mapStateToProps = (state) => ({
   user: state.user.user,
   devices: state.api.devices,
   errors: state.UI.errors,
 });
 
-export default connect(mapStateToProps)(CreateRequest);
+export default connect(mapStateToProps, mapDispatchToProps)(CreateRequest);

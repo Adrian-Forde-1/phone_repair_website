@@ -92,14 +92,12 @@ $darker-blue-color: #1f91cc;
 }
 
 .logo {
-  height: 100%;
+  display: flex;
+  align-items: center;
   a {
-    display: block;
-    height: 80%;
-    margin: auto 0px;
-    img {
-      height: 100%;
-    }
+    font-weight: 400;
+    font-size: 20px;
+    color: white;
   }
 }
 
@@ -232,6 +230,15 @@ $darker-blue-color: #1f91cc;
         opacity: 1;
         clip-path: circle(100% at center);
       }
+    }
+  }
+}
+
+@media screen and (max-width: 850px) {
+  .nav-link {
+    a,
+    button {
+      font-size: 12px;
     }
   }
 }
