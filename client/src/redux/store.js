@@ -6,18 +6,16 @@ import thunk from 'redux-thunk';
 
 const persistConfig = {
   key: 'root',
-  storage
+  storage,
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-const store = createStore(
-  persistedReducer,
-  compose(
-    applyMiddleware(thunk),
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-  )
-);
+const store = createStore(persistedReducer, applyMiddleware(thunk));
 export var persistor = persistStore(store);
+// compose(
+//   applyMiddleware(thunk),
+//   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+// );
 
 export default store;
