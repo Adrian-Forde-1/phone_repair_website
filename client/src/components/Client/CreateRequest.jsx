@@ -215,4 +215,4 @@ const mapStateToProps = (state) => ({
   errors: state.UI.errors,
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(CreateRequest);
+export default connect(mapStateToProps)(CreateRequest);
