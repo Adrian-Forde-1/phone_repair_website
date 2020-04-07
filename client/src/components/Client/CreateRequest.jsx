@@ -35,22 +35,25 @@ class CreateRequest extends Component {
   }
 
   componentDidMount() {
-    this.props.getAllDevices();
-    if (this.props.devices.length > 0) {
-      this.setState({
-        device: this.props.devices[0].name,
-      });
-
-      axios
-        .get(`/user/${this.props.devices[0].name}/typeOfRepairs`, {
-          headers: { Authorization: localStorage.getItem('token') },
-        })
-        .then((response) => {
-          this.setState({
-            typeOfRepairs: [...response.data],
-          });
+    axios
+      .get('/user/devices', {
+        headers: { Authorization: localStorage.getItem('token') },
+      })
+      .then((response) => {
+        this.setState({
+          device: response.data[0].name,
         });
-    }
+
+        axios
+          .get(`/user/${response.data[0].name}/typeOfRepairs`, {
+            headers: { Authorization: localStorage.getItem('token') },
+          })
+          .then((response) => {
+            this.setState({
+              typeOfRepairs: [...response.data],
+            });
+          });
+      });
   }
 
   handleOnChange = (e) => {

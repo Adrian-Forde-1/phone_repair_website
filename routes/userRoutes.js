@@ -19,6 +19,7 @@ const {
   getTypeOfRepairs,
   getAllUserRequests,
   getIndividualRequest,
+  getDevices,
 } = require('../controllers/userController');
 
 router.post('/login', passportLocal, login);
@@ -29,6 +30,8 @@ router.get(
   isUserAllowed(roles.Owner, roles.Admin, roles.Customer),
   getUserInfo
 );
+
+router.get('/devices', passportJWT, isUserAllowed(roles.Customer), getDevices);
 
 router.post(
   '/request',

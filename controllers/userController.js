@@ -5,6 +5,7 @@ const { roles } = require('../util/roles');
 const User = require('../models/UserModel');
 const Request = require('../models/RequestModel');
 const TypeOfRepair = require('../models/TypeOfRepairModel');
+const Device = require('../models/DeviceModel');
 const { jwt_secret } = require('../configuration/config');
 
 const isEmpty = (string) => {
@@ -217,6 +218,18 @@ exports.getIndividualRequest = (req, res) => {
       return res.json(request);
     });
   }
+};
+
+exports.getDevices = (req, res) => {
+  Device.find()
+    .populate('createdBy')
+    .then((devices) => {
+      return res.json(devices);
+    })
+    .catch((error) => {
+      console.error(error);
+      return res.status(500).json({ error: error });
+    });
 };
 
 exports.getTypeOfRepairs = (req, res) => {

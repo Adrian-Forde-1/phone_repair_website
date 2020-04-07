@@ -516,12 +516,15 @@ footer {
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 30vh;
+  min-height: 30vh;
+  max-height: auto;
   background: #181818;
 
   .footer-contact-info {
     width: 50%;
     display: flex;
+    flex-direction: column;
+    align-items: center;
     justify-content: space-around;
   }
   h2 {
@@ -718,7 +721,8 @@ footer {
 
 .individual-request {
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
+  max-height: auto;
   color: black;
   h1 {
     font-size: 50px;
@@ -1098,6 +1102,13 @@ div[class*='type-of-repair'] {
     height: 3.5rem;
     font-size: 25px;
   }
+
+  footer {
+    a,
+    p {
+      font-size: 14px;
+    }
+  }
 }
 
 @media screen and (max-width: 650px) {
@@ -1109,6 +1120,13 @@ div[class*='type-of-repair'] {
 
   .individual-device {
     width: 100%;
+  }
+
+  footer {
+    a,
+    p {
+      font-size: 12px;
+    }
   }
 }
 
@@ -1182,4 +1200,17 @@ div[class*='type-of-repair'] {
       }
     }
   }
+
+  footer {
+    a,
+    p {
+      font-size: 10px;
+    }
+  }
 }
+
+// @media screen and (max-height: 400px) {
+//   .individual-request {
+//     min-height: 120vh;
+//   }
+// }
