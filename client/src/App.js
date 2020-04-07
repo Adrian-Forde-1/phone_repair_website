@@ -20,6 +20,7 @@ import ReactDOM from 'react-dom';
 import CreateRequest from './components/Client/CreateRequest';
 import AllClientRequest from './components/Client/AllClientRequest';
 import IndividualRequest from './components/Client/IndividualRequest';
+import ScrollToTop from './components/ScrollToTop';
 
 function App(props) {
   const { loading } = props;
@@ -45,25 +46,27 @@ function App(props) {
   }, [loading]);
   return (
     <Router>
-      <Navbar />
-      <div className="App">
-        {/* <Loading /> */}
-        {/* {loading === true && <Loading />} */}
-        <Route exact path="/" component={Homepage} />
-        <Route exact path="/login" component={Login} />
-        <Route exact path="/signup" component={Signup} />
+      <ScrollToTop>
+        <Navbar />
+        <div className="App">
+          {/* <Loading /> */}
+          {/* {loading === true && <Loading />} */}
+          <Route exact path="/" component={Homepage} />
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/signup" component={Signup} />
 
-        <Route exact path="/admin" component={AdminPage} />
+          <Route exact path="/admin" component={AdminPage} />
 
-        <Route exact path="/request" component={CreateRequest} />
-        <Route exact path="/requests" component={AllClientRequest} />
-        <Route
-          exact
-          path="/requests/:requestId"
-          component={IndividualRequest}
-        />
-        <Footer />
-      </div>
+          <Route exact path="/request" component={CreateRequest} />
+          <Route exact path="/requests" component={AllClientRequest} />
+          <Route
+            exact
+            path="/requests/:requestId"
+            component={IndividualRequest}
+          />
+          <Footer />
+        </div>
+      </ScrollToTop>
     </Router>
   );
 }
