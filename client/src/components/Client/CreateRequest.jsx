@@ -12,7 +12,6 @@ import { connect } from 'react-redux';
 import store from '../../redux/store';
 
 //Actions
-import { getAllDevices } from '../../redux/actions/deviceActions';
 import { SET_MESSAGES } from '../../redux/actions/types';
 
 class CreateRequest extends Component {
@@ -35,7 +34,6 @@ class CreateRequest extends Component {
   }
 
   componentDidMount() {
-    this.props.getAllDevices();
     this.setState({
       device: this.props.devices[0].name,
     });
@@ -210,10 +208,6 @@ class CreateRequest extends Component {
     } else return <Page404 />;
   }
 }
-
-const mapDispatchToProps = {
-  getAllDevices,
-};
 
 const mapStateToProps = (state) => ({
   user: state.user.user,

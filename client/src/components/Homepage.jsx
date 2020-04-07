@@ -17,12 +17,11 @@ import testimonial_2 from '../resources/images/testimonial_2.jpg';
 import Who from '../resources/images/Who.svg';
 
 //Actions
-// import { getUserData } from '../redux/actions/userActions';
+import { getAllDevices } from '../redux/actions/deviceActions';
 
 class Homepage extends Component {
   componentDidMount() {
-    console.log(this.props);
-    // this.props.getUserData(localStorage.getItem('token'));
+    this.props.getAllDevices();
   }
   render() {
     const { user, authenticated } = this.props;
@@ -142,13 +141,13 @@ class Homepage extends Component {
 //   getUserData: PropTypes.func
 // };
 
-// const mapDispatchToProps = {
-//   getUserData
-// };
+const mapDispatchToProps = {
+  getAllDevices,
+};
 
 const mapStateToProps = (state) => ({
   user: state.user.user,
   authenticated: state.user.authenticated,
 });
 
-export default connect(mapStateToProps)(Homepage);
+export default connect(mapStateToProps, mapDispatchToProps)(Homepage);

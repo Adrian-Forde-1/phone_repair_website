@@ -23,7 +23,7 @@ const {
   getTypeOfRepairs,
   deleteTypeOfRepair,
   updateTypeOfRepair,
-  createTypeOfRepairs
+  createTypeOfRepairs,
 } = require('../controllers/apiController');
 
 //Users
@@ -81,7 +81,7 @@ router.post(
 router.get(
   '/devices',
   passportJWT,
-  isUserAllowed(roles.Owner, roles.Admin),
+  isUserAllowed(roles.Owner, roles.Admin, roles.Customer),
   getAllDevices
 );
 router.get(
