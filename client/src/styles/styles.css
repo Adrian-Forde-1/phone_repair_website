@@ -829,7 +829,7 @@ body::-webkit-scrollbar-thumb {
   height: 50%;
 }
 
-.homepage-content .homepage-header .call-to-action-btn {
+.call-to-action-btn {
   border: none;
   background: none;
   cursor: pointer;
@@ -837,21 +837,22 @@ body::-webkit-scrollbar-thumb {
   margin-top: 20px;
 }
 
-.homepage-content .homepage-header .call-to-action-btn a {
+.call-to-action-btn a {
   display: block;
   width: 100%;
   border-radius: 5px;
   padding: 10px 20px;
-  color: white;
+  color: #14cca7;
   font-size: 30px;
+  background: white;
   text-transform: capitalize;
   -webkit-transition: color 500ms, background 500ms ease;
   transition: color 500ms, background 500ms ease;
 }
 
-.homepage-content .homepage-header .call-to-action-btn a:hover {
-  color: #14cca7;
-  background: white;
+.call-to-action-btn a:hover {
+  color: white;
+  background: none;
 }
 
 section {
@@ -1854,8 +1855,8 @@ div[class*='type-of-repair'] {
   .about-us img {
     width: 70%;
   }
-  .testimonials .testimonial-img img {
-    height: 80%;
+  .testimonials .testimonial-item .testimonial-img img {
+    height: 150px;
   }
   .individual-device {
     width: 80%;
@@ -1863,6 +1864,9 @@ div[class*='type-of-repair'] {
 }
 
 @media screen and (max-width: 768px) {
+  .call-to-action-btn a {
+    font-size: 24px;
+  }
   .homepage-header h2 {
     font-size: 18px;
   }
@@ -1900,7 +1904,7 @@ div[class*='type-of-repair'] {
     font-size: 10px;
   }
   .testimonials .testimonial-item .testimonial-img {
-    height: 100px;
+    height: 125px;
   }
   .device-save-changes-btn,
   .remove-device-btn,
@@ -1927,6 +1931,9 @@ div[class*='type-of-repair'] {
   footer p {
     font-size: 12px;
   }
+  .testimonials .testimonial-item .testimonial-img img {
+    height: 100px;
+  }
 }
 
 @media screen and (max-width: 567px) {
@@ -1945,6 +1952,9 @@ div[class*='type-of-repair'] {
   .testimonials {
     -ms-grid-columns: (1fr)[1];
         grid-template-columns: repeat(1, 1fr);
+  }
+  .testimonials .testimonial-item .testimonial-img {
+    width: 200px;
   }
   .admin-info-section > div {
     padding: 20px 0px 0px 0px;
@@ -1971,8 +1981,8 @@ div[class*='type-of-repair'] {
   .homepage-header h2 {
     font-size: 18px;
   }
-  .homepage-header .call-to-action-btn a {
-    font-size: 20px;
+  .call-to-action-btn a {
+    font-size: 16px;
   }
   footer a,
   footer p {
