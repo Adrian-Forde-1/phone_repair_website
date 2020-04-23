@@ -55,6 +55,7 @@ $yellow-color: #faff00;
     flex-direction: column;
     align-items: center;
     li {
+      width: 100%;
       margin: 40px 0px;
       list-style: none;
       cursor: pointer;
@@ -105,10 +106,18 @@ $yellow-color: #faff00;
         i {
           color: white;
           font-size: 30px;
-          margin-right: 10px;
+          display: block;
+          margin: 0px auto;
         }
 
         &:hover {
+          background-color: rgba(255, 255, 255, 0.4);
+          i {
+            margin-right: 10px;
+          }
+        }
+
+        &.selected {
           background-color: rgba(255, 255, 255, 0.4);
         }
       }

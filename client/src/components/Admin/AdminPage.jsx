@@ -19,42 +19,60 @@ import AllDevices from './AllDevices';
 import Page404 from '../404';
 
 class AdminPage extends Component {
+  constructor(props) {
+    super(props);
+
+    this.renderUsers = this.renderUsers.bind(this);
+    this.renderRequests = this.renderRequests.bind(this);
+    this.renderDevices = this.renderDevices.bind(this);
+  }
   componentDidMount() {
     this.props.getAllUsers(localStorage.getItem('token'));
     this.props.getAllRequest(localStorage.getItem('token'));
     this.props.getAllDevices(localStorage.getItem('token'));
     // const infoSection = document.querySelector('.admin-info-section');
 
-    const infoSection = document.querySelector('.admin-info-section');
-    ReactDOM.render(<AllRequest requests={this.props.requests} />, infoSection);
+    this.renderRequests();
   }
 
+  renderUsers = (e) => {
+    const selectedButtons = document.querySelectorAll('.selected');
+    selectedButtons.forEach((button) => button.classList.remove('selected'));
+
+    document.querySelector('#render-users-btn').classList.add('selected');
+
+    const infoSection = document.querySelector('.admin-info-section');
+    ReactDOM.render(<AllUsers users={this.props.users} />, infoSection);
+  };
+
+  renderRequests = (e) => {
+    const selectedButtons = document.querySelectorAll('.selected');
+    selectedButtons.forEach((button) => button.classList.remove('selected'));
+
+    document.querySelector('#render-requests-btn').classList.add('selected');
+
+    const infoSection = document.querySelector('.admin-info-section');
+    ReactDOM.render(<AllRequest requests={this.props.requests} />, infoSection);
+  };
+
+  renderDevices = (e) => {
+    const selectedButtons = document.querySelectorAll('.selected');
+    selectedButtons.forEach((button) => button.classList.remove('selected'));
+
+    document.querySelector('#render-devices-btn').classList.add('selected');
+
+    const infoSection = document.querySelector('.admin-info-section');
+    ReactDOM.render(
+      <AllDevices
+        devices={this.props.devices}
+        user={this.props.user}
+        messages={this.props.messages}
+      />,
+      infoSection
+    );
+  };
+
   render() {
-    const renderUsers = () => {
-      const infoSection = document.querySelector('.admin-info-section');
-      ReactDOM.render(<AllUsers users={this.props.users} />, infoSection);
-    };
-
-    const renderRequests = () => {
-      const infoSection = document.querySelector('.admin-info-section');
-      ReactDOM.render(
-        <AllRequest requests={this.props.requests} />,
-        infoSection
-      );
-    };
-
-    const renderDevices = () => {
-      const infoSection = document.querySelector('.admin-info-section');
-      ReactDOM.render(
-        <AllDevices
-          devices={this.props.devices}
-          user={this.props.user}
-          messages={this.props.messages}
-        />,
-        infoSection
-      );
-    };
-
     if (this.props.user !== undefined) {
       if (
         this.props.user.role === 'Owner' ||
@@ -88,19 +106,22 @@ class AdminPage extends Component {
                   </button>
                 </li> */}
                 <li>
-                  <button onClick={renderUsers}>
+                  <button onClick={this.renderUsers} id="render-users-btn">
                     <i className="fas fa-users"></i>
                     <p>Users</p>
                   </button>
                 </li>
                 <li>
-                  <button onClick={renderRequests}>
+                  <button
+                    onClick={this.renderRequests}
+                    id="render-requests-btn"
+                  >
                     <i className="fas fa-copy"></i>
                     <p>Requests</p>
                   </button>
                 </li>
                 <li>
-                  <button onClick={renderDevices}>
+                  <button onClick={this.renderDevices} id="render-devices-btn">
                     <i className="fas fa-mobile"></i>
                     <p>Devices</p>
                   </button>

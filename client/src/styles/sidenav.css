@@ -77,6 +77,7 @@
 }
 
 .side-nav ul li {
+  width: 100%;
   margin: 40px 0px;
   list-style: none;
   cursor: pointer;
@@ -141,10 +142,19 @@
 .side-nav ul li button i {
   color: white;
   font-size: 30px;
-  margin-right: 10px;
+  display: block;
+  margin: 0px auto;
 }
 
 .side-nav ul li button:hover {
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
+.side-nav ul li button:hover i {
+  margin-right: 10px;
+}
+
+.side-nav ul li button.selected {
   background-color: rgba(255, 255, 255, 0.4);
 }
 

@@ -16,7 +16,7 @@ class AllRequest extends Component {
 
   componentDidMount() {
     this.setState({
-      filter: 'Pending Acceptance',
+      filter: 'All',
     });
   }
 
@@ -36,6 +36,7 @@ class AllRequest extends Component {
             placeholder="Search by client's name"
           />
           <select name="filter" id="filter" onChange={this.onChange}>
+            <option value="All">All</option>
             <option value="Pending Acceptance">Pending</option>
             <option value="Awaiting Device">Awaiting Device</option>
             <option value="Being Repaired">Being Repaired</option>
@@ -46,22 +47,31 @@ class AllRequest extends Component {
         {this.props.requests ? (
           <div className="request-container">
             {this.state.search === ''
-              ? this.props.requests.map(
-                  (request) =>
-                    request.status.toLowerCase() ===
-                      this.state.filter.toLowerCase() && (
-                      <RequestPreview request={request} key={request._id} />
-                    )
-                )
-              : this.props.requests.map(
-                  (request) =>
-                    request.status.toLowerCase() ===
-                      this.state.filter.toLowerCase() &&
-                    request.usersname
-                      .toLowerCase()
-                      .indexOf(this.state.search.toLowerCase()) > -1 && (
-                      <RequestPreview request={request} key={request._id} />
-                    )
+              ? this.state.filter === 'All'
+                ? this.props.requests.map((request) => (
+                    <RequestPreview request={request} key={request._id} />
+                  ))
+                : this.props.requests.map(
+                    (request) =>
+                      request.status.toLowerCase() ===
+                        this.state.filter.toLowerCase() && (
+                        <RequestPreview request={request} key={request._id} />
+                      )
+                  )
+              : this.props.requests.map((request) =>
+                  this.state.filter === 'All'
+                    ? request.usersname
+                        .toLowerCase()
+                        .indexOf(this.state.search.toLowerCase()) > -1 && (
+                        <RequestPreview request={request} key={request._id} />
+                      )
+                    : request.status.toLowerCase() ===
+                        this.state.filter.toLowerCase() &&
+                      request.usersname
+                        .toLowerCase()
+                        .indexOf(this.state.search.toLowerCase()) > -1 && (
+                        <RequestPreview request={request} key={request._id} />
+                      )
                 )}
           </div>
         ) : (

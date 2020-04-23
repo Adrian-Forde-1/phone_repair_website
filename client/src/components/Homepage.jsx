@@ -6,6 +6,10 @@ import { Link } from 'react-router-dom';
 
 //redux
 import { connect } from 'react-redux';
+import store from '../redux/store';
+
+//Actions
+import { STOP_LOADING_UI } from '../redux/actions/types';
 
 //Resources
 import Clock_Logo from '../resources/logos/Clock_Logo.svg';
@@ -17,6 +21,9 @@ import testimonial_2 from '../resources/images/testimonial_2.jpg';
 import Who from '../resources/images/Who.svg';
 
 class Homepage extends Component {
+  componentDidMount() {
+    store.dispatch({ type: STOP_LOADING_UI });
+  }
   render() {
     const { user, authenticated } = this.props;
     return (
