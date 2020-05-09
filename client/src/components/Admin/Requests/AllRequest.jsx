@@ -1,6 +1,16 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import RequestPreview from './RequestPreview';
+
+//Redux
+import { connect } from 'react-redux';
+
+//Actions
+import { getAllRequest } from '../../../redux/actions/requestActions';
+
+//Components
+import AdminSideBar from '../AdminSideBar';
+import SearchAndSelect from '../../Util/SearchAndSelect';
+import RequestPreview from '../Previews/RequestPreview';
 
 class AllRequest extends Component {
   constructor(props) {
@@ -10,14 +20,12 @@ class AllRequest extends Component {
 
     this.state = {
       search: '',
-      filter: '',
+      filter: 'All',
     };
   }
 
   componentDidMount() {
-    this.setState({
-      filter: 'All',
-    });
+    this.props.getAllRequest(localStorage.getItem('token'));
   }
 
   onChange = (e) => {
@@ -28,24 +36,11 @@ class AllRequest extends Component {
   render() {
     return (
       <div className="admin-info-div">
-        <form className="search-bar">
-          <input
-            type="search"
-            name="search"
-            onChange={this.onChange}
-            placeholder="Search by client's name"
-          />
-          <select name="filter" id="filter" onChange={this.onChange}>
-            <option value="All">All</option>
-            <option value="Pending Acceptance">Pending</option>
-            <option value="Awaiting Device">Awaiting Device</option>
-            <option value="Being Repaired">Being Repaired</option>
-            <option value="Completed">Completed</option>
-          </select>
-        </form>
+        <AdminSideBar />
+        <SearchAndSelect onChange={this.onChange} />
 
         {this.props.requests ? (
-          <div className="request-container">
+          <div className="request-preview-container">
             {this.state.search === ''
               ? this.state.filter === 'All'
                 ? this.props.requests.map((request) => (
@@ -82,4 +77,12 @@ class AllRequest extends Component {
   }
 }
 
-export default AllRequest;
+const mapDispatchToProps = {
+  getAllRequest,
+};
+
+const mapStateToProps = (state) => ({
+  requests: state.api.requests,
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(AllRequest);

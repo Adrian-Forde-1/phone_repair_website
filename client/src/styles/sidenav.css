@@ -2,9 +2,7 @@
   height: 20px;
   width: 50px;
   color: white;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
+  display: none;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
@@ -71,6 +69,9 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: start;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -78,7 +79,8 @@
 
 .side-nav ul li {
   width: 100%;
-  margin: 40px 0px;
+  margin: 5px 0px;
+  height: 60px;
   list-style: none;
   cursor: pointer;
 }
@@ -86,11 +88,12 @@
 .side-nav ul li:nth-of-type(1) {
   margin: 10px 0px;
   width: 100%;
+  height: initial;
 }
 
 .side-nav ul li:nth-of-type(1) a {
-  margin: 0 auto;
-  display: block;
+  margin: auto auto;
+  display: inline-block;
 }
 
 .side-nav ul li:nth-of-type(1) a i {
@@ -100,27 +103,16 @@
   text-align: center;
 }
 
-.side-nav ul li a,
-.side-nav ul li button {
+.side-nav ul li button,
+.side-nav ul li a {
   height: 100%;
   margin: 10px auto;
-}
-
-.side-nav ul li a {
-  text-decoration: none;
-}
-
-.side-nav ul li a i {
-  color: white;
-  font-size: 30px;
-}
-
-.side-nav ul li button {
   width: 100%;
   background: none;
   padding: 0px 10px;
   outline: none;
   border: none;
+  text-decoration: none;
   cursor: pointer;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -130,7 +122,8 @@
           justify-content: flex-start;
 }
 
-.side-nav ul li button p {
+.side-nav ul li button p,
+.side-nav ul li a p {
   display: none;
   visibility: visible;
   opacity: 0;
@@ -139,22 +132,26 @@
   transition: opacity 300ms;
 }
 
-.side-nav ul li button i {
+.side-nav ul li button i,
+.side-nav ul li a i {
   color: white;
   font-size: 30px;
   display: block;
-  margin: 0px auto;
+  margin: auto auto;
 }
 
-.side-nav ul li button:hover {
+.side-nav ul li button:hover,
+.side-nav ul li a:hover {
   background-color: rgba(255, 255, 255, 0.4);
 }
 
-.side-nav ul li button:hover i {
+.side-nav ul li button:hover i,
+.side-nav ul li a:hover i {
   margin-right: 10px;
 }
 
-.side-nav ul li button.selected {
+.side-nav ul li button.selected,
+.side-nav ul li a.selected {
   background-color: rgba(255, 255, 255, 0.4);
 }
 
@@ -165,7 +162,7 @@
 }
 
 .side-nav:hover {
-  width: 200px;
+  min-width: 200px;
 }
 
 .side-nav:hover ul li {
@@ -176,18 +173,15 @@
   width: auto;
 }
 
-.side-nav:hover ul li button i {
-  margin-left: 20px;
-}
-
-.side-nav:hover ul li button p {
+.side-nav:hover ul li button p,
+.side-nav:hover ul li a p {
   display: block;
   margin: auto;
   visibility: visible;
   opacity: 1;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 992px) {
   .side-nav-opener {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -201,10 +195,12 @@
   .side-nav ul li {
     width: 100%;
   }
-  .side-nav ul li button i {
+  .side-nav ul li button i,
+  .side-nav ul li a i {
     margin-left: 20px;
   }
-  .side-nav ul li button p {
+  .side-nav ul li button p,
+  .side-nav ul li a p {
     display: block;
     margin: auto;
     visibility: visible;

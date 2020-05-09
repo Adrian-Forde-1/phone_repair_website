@@ -3,16 +3,16 @@ import axios from 'axios';
 import ReactDOM from 'react-dom';
 
 //Components
-import ToastMessage from '../ToastMessage';
-import ToastError from '../ToastError';
+import ToastMessage from '../../ToastMessage';
+import ToastError from '../../ToastError';
 import AllDevices from './AllDevices';
 
 //Redux
-import store from '../../redux/store';
+import store from '../../../redux/store';
 
 //Actions
-import { getAllDevices } from '../../redux/actions/deviceActions';
-import { SET_MESSAGES } from '../../redux/actions/types';
+import { getAllDevices } from '../../../redux/actions/deviceActions';
+import { SET_MESSAGES } from '../../../redux/actions/types';
 
 class IndividualDevice extends Component {
   constructor(props) {

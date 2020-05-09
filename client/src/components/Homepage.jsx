@@ -43,7 +43,7 @@ class Homepage extends Component {
                     user.role === 'Customer' ? (
                       <Link to="/request">Create a Request</Link>
                     ) : (
-                      <Link to="/admin">Admin</Link>
+                      <Link to="/admin/dashboard">Dashboard</Link>
                     )
                   ) : (
                     <Link to="/signup">Sign Up</Link>

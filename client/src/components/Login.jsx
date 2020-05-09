@@ -93,7 +93,9 @@ class Login extends Component {
             />
             <span></span>
           </div>
-          <input className="submit-btn" type="submit" />
+          <button className="submit-btn" type="submit">
+            Login
+          </button>
 
           <div className="bottom-text">
             Don't have an account? <Link to="/signup">Sign up</Link>

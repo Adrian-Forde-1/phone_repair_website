@@ -6,7 +6,7 @@
 $purple-color: #c314cc;
 $pink-color: #ff40b1;
 $blue-color: #14cca7;
-$green-color: #00ff3b;
+$green-color: #000000;
 $darker-blue-color: #212d9a;
 $yellow-color: #faff00;
 
@@ -35,7 +35,7 @@ body {
   }
 
   &::-webkit-scrollbar-thumb {
-    background-color: $pink-color;
+    background-color: $darker-blue-color;
   }
 }
 
@@ -104,12 +104,12 @@ body {
     }
 
     .header-text {
-      text-align: start;
-
       h2 {
+        text-align: center;
         margin-bottom: 10px;
       }
       p {
+        text-align: left;
         font-size: 12px;
       }
     }
@@ -551,15 +551,19 @@ footer {
   overflow-x: hidden;
 }
 .search-bar {
+  width: 100%;
   display: flex;
-  margin: 0px auto 20px auto;
-  border-radius: 10px;
+  justify-content: start;
+  // margin: 20px auto 20px auto;
+  margin-top: 20px;
+  margin-bottom: 40px;
   height: 30px;
 
   &.no-select {
     input {
-      border-radius: 10px !important;
-      margin: auto !important;
+      margin-right: auto;
+      width: 300px;
+      // margin: auto !important;
       height: 30px;
     }
   }
@@ -575,13 +579,9 @@ footer {
   }
 
   input {
+    width: 300px;
     padding: 10px;
-    width: 70%;
-    margin-left: auto;
-    border-top-left-radius: 10px;
-    border-bottom-left-radius: 10px;
-    border: 1px solid $darker-blue-color;
-    outline: none;
+    border: 2px solid $darker-blue-color;
   }
 }
 
@@ -594,6 +594,13 @@ footer {
 }
 
 .admin-info-div {
+  min-height: 100vh;
+  padding-left: 100px;
+  padding-right: 20px;
+
+  h1 {
+    color: black;
+  }
   color: black;
 }
 
@@ -612,6 +619,7 @@ footer {
 
 .individual-user {
   color: black;
+  min-height: 100vh;
 
   h1 {
     width: 100%;
@@ -641,7 +649,7 @@ footer {
   cursor: pointer;
 }
 
-.request-container {
+.request-preview-container {
   width: 100%;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -651,10 +659,11 @@ footer {
 .request-preview {
   height: 30vh;
   max-width: 400px;
-  border-radius: 10px;
   color: white;
   padding: 20px;
-  background: $darker-blue-color;
+  background-image: url('../resources/images/User_Background.svg');
+  background-repeat: no-repeat;
+  background-size: cover;
   margin: 0px !important;
   cursor: pointer;
   font-family: 'Roboto', sans-serif;
@@ -822,7 +831,7 @@ footer {
   cursor: pointer;
 }
 
-.device-container {
+.device-preview-container {
   width: 100%;
   height: 100%;
   display: grid;
@@ -830,38 +839,47 @@ footer {
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   // border: 1px solid red;
 
-  .device {
+  .device-preview {
     display: flex;
     justify-content: center;
     color: white;
     padding: 10px 15px;
-    // background: linear-gradient($darker-blue-color, $blue-color);
-    background-color: $darker-blue-color;
-    border-radius: 10px;
+    background-image: url('../resources/images/User_Background.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
     cursor: pointer;
+
+    a {
+      color: white;
+    }
   }
 }
 
-.user-container {
+.user-preview-container {
   width: 100%;
   height: 100%;
   display: grid;
   gap: 20px;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
 
-  .user {
+  .user-preview {
     color: white;
     padding: 10px 15px;
-    // background: linear-gradient($darker-blue-color, $blue-color);
-    background-color: $darker-blue-color;
-    border-radius: 10px;
+    background-image: url('../resources/images/User_Background.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
     cursor: pointer;
     font-weight: lighter;
 
+    a {
+      color: white;
+    }
+
     p {
       &:nth-of-type(1) {
-        font-size: 22px;
+        font-size: 26px;
       }
+      font-size: 12px;
       display: block;
       text-align: center;
       font-weight: lighter;
@@ -1024,6 +1042,10 @@ div[class*='type-of-repair'] {
     }
   }
 
+  .search-bar {
+    margin-left: 80px;
+  }
+
   .form {
     width: 60%;
   }
@@ -1048,6 +1070,10 @@ div[class*='type-of-repair'] {
 
   .individual-device {
     width: 80%;
+  }
+
+  .admin-info-div {
+    padding-left: 20px;
   }
 }
 

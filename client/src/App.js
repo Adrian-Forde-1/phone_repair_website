@@ -2,7 +2,7 @@ import React from 'react';
 import './styles/styles.css';
 
 //react router dom
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import Homepage from './components/Homepage';
 import Signup from './components/Signup';
@@ -21,6 +21,11 @@ import CreateRequest from './components/Client/CreateRequest';
 import AllClientRequest from './components/Client/AllClientRequest';
 import IndividualRequest from './components/Client/IndividualRequest';
 import ScrollToTop from './components/ScrollToTop';
+import AllUsers from './components/Admin/Users/AllUsers';
+import AllRequest from './components/Admin/Requests/AllRequest';
+import AllDevices from './components/Admin/Devices/AllDevices';
+import Dashboard from './components/Admin/Dashboard';
+import IndividualUser from './components/Admin/Users/IndividualUser';
 
 function App(props) {
   const { loading } = props;
@@ -51,19 +56,25 @@ function App(props) {
         <div className="App">
           {/* <Loading /> */}
           {/* {loading === true && <Loading />} */}
-          <Route exact path="/" component={Homepage} />
-          <Route exact path="/login" component={Login} />
-          <Route exact path="/signup" component={Signup} />
+          <Switch>
+            <Route exact path="/" component={Homepage} />
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/signup" component={Signup} />
 
-          <Route exact path="/admin" component={AdminPage} />
+            <Route exact path="/admin/dashboard" component={Dashboard} />
+            <Route path="/admin/users" component={AllUsers} />
+            <Route path="/admin/requests" component={AllRequest} />
+            <Route path="/admin/devices" component={AllDevices} />
+            <Route path="/admin/user/:userId" component={IndividualUser} />
 
-          <Route exact path="/request" component={CreateRequest} />
-          <Route exact path="/requests" component={AllClientRequest} />
-          <Route
-            exact
-            path="/requests/:requestId"
-            component={IndividualRequest}
-          />
+            <Route exact path="/request" component={CreateRequest} />
+            <Route exact path="/requests" component={AllClientRequest} />
+            <Route
+              exact
+              path="/requests/:requestId"
+              component={IndividualRequest}
+            />
+          </Switch>
           <Footer />
         </div>
       </ScrollToTop>

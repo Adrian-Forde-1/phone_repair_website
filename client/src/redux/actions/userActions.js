@@ -93,3 +93,15 @@ export const getAllUsers = (token) => (dispatch) => {
       });
   }
 };
+
+export const setErrors = (error) => (dispatch) => {
+  dispatch({ type: SET_ERRORS, payload: error.response.data });
+};
+
+export const setLoadingUI = () => (dispatch) => {
+  dispatch({ type: LOADING_UI });
+};
+
+export const stopLoadingUI = () => (dispatch) => {
+  dispatch({ type: STOP_LOADING_UI });
+};

@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
-import IPhoneXImg from '../resources/images/iphoneX-logo.svg';
 
 //react router dom
 import { Link } from 'react-router-dom';
@@ -14,22 +13,28 @@ import { logoutUser } from '../redux/actions/userActions';
 
 function Navbar(props) {
   useEffect(() => {
-    if (props.location.pathname !== '/admin') {
-      if (props.location.pathname === '/' || props.location.pathname === '') {
-        document.querySelector('.navbar').style.background = '';
-      }
-
-      if (props.location.pathname !== '/') {
-        document.querySelector('.navbar').style.background =
-          'linear-gradient(90deg, #14cca7, #212d9a)';
-      }
+    console.log(props.location.pathname);
+    if (props.location.pathname === '/' || props.location.pathname === '') {
+      document.querySelector('.navbar').style.background = 'transparent';
     }
+
+    // if (
+    //   (props.location.pathname !== '/' &&
+    //     props.location.pathname.indexOf('admin') > -1) ||
+    //   (props.location.pathname !== '/' &&
+    //     props.location.pathname.indexOf('dashboard') > -1)
+    // ) {
+    //   document.querySelector('.navbar').style.background =
+    //     'linear-gradient(90deg, #14cca7, #212d9a)';
+    // }
   }, [props.location.pathname]);
   const { user, authenticated } = props;
 
-  if (props.location.pathname === '/admin') {
-    return null;
-  } else {
+  if (
+    props.location.pathname === '/' ||
+    props.location.pathname === '/login' ||
+    props.location.pathname === '/signup'
+  ) {
     return (
       <nav className="navbar">
         <div className="logo">
@@ -64,7 +69,7 @@ function Navbar(props) {
             user !== undefined &&
             user.role === 'Owner' && (
               <li className="nav-link">
-                <Link to="/admin">Admin</Link>
+                <Link to="/admin/dashboard">Dashboard</Link>
               </li>
             )}
           {authenticated === true &&
@@ -103,6 +108,8 @@ function Navbar(props) {
         </ul>
       </nav>
     );
+  } else {
+    return null;
   }
 }
 

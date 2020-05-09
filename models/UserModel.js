@@ -41,6 +41,9 @@ const userSchema = new mongoose.Schema({
   },
 });
 
+userSchema.set('toObject', { virtuals: true });
+userSchema.set('toJSON', { virtuals: true });
+
 userSchema.pre('save', async function (next) {
   try {
     //Generate a salt
@@ -65,6 +68,17 @@ userSchema.methods.isValidPassword = async function (newPassword) {
     throw new Error(error);
   }
 };
+
+userSchema
+  .virtual('fullname')
+  .get(function () {
+    return `${this.fname} ${this.lname}`;
+  })
+  .set(function (name) {
+    let split = name.split(' ');
+    this.fname = split[0];
+    this.lname = split[1];
+  });
 
 const User = mongoose.model('user', userSchema);
 

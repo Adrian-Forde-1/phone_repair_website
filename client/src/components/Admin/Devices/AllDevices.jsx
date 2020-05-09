@@ -1,11 +1,18 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import AddDevice from './AddDevice';
 import ReactDOM from 'react-dom';
-import IndividualDevice from './IndividualDevice';
 
 //Redux
-import store from '../../redux/store';
+import { connect } from 'react-redux';
+
+//Actions
+import { getAllDevices } from '../../../redux/actions/deviceActions';
+
+//Components
+import AdminSideBar from '../AdminSideBar';
+import IndividualDevice from './IndividualDevice';
+import AddDevice from './AddDevice';
+import DevicePreview from '../Previews/DevicePreview';
 
 class AllDevices extends Component {
   constructor(props) {
@@ -18,6 +25,10 @@ class AllDevices extends Component {
     this.state = {
       search: '',
     };
+  }
+
+  componentDidMount() {
+    this.props.getAllDevices(localStorage.getItem('token'));
   }
 
   onSearchChange = (e) => {
@@ -42,6 +53,7 @@ class AllDevices extends Component {
   render() {
     return (
       <div className="admin-info-div">
+        <AdminSideBar />
         <form className="search-bar no-select">
           <input
             type="text"
@@ -52,31 +64,15 @@ class AllDevices extends Component {
         </form>
 
         {this.props.devices ? (
-          <div className="device-container">
+          <div className="device-preview-container">
             {this.props.devices.map((device) =>
               this.state.search === '' ? (
-                <div
-                  className="device"
-                  key={device._id}
-                  onClick={() => {
-                    this.renderIndividualDevice(device);
-                  }}
-                >
-                  <p>{device.name}</p>
-                </div>
+                <DevicePreview device={device} key={device._id} />
               ) : (
                 device.name
                   .toLowerCase()
                   .indexOf(this.state.search.toLowerCase()) > -1 && (
-                  <div
-                    className="device"
-                    key={device._id}
-                    onClick={() => {
-                      this.renderIndividualDevice(device, this.props.messages);
-                    }}
-                  >
-                    <p>{device.name}</p>
-                  </div>
+                  <DevicePreview device={device} key={device._id} />
                 )
               )
             )}
@@ -93,4 +89,12 @@ class AllDevices extends Component {
   }
 }
 
-export default AllDevices;
+const mapDispatchToProps = {
+  getAllDevices,
+};
+
+const mapStateToProps = (state) => ({
+  devices: state.api.devices,
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(AllDevices);

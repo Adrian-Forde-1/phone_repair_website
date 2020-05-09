@@ -10,7 +10,7 @@ $yellow-color: #faff00;
   height: 20px;
   width: 50px;
   color: white;
-  display: flex;
+  display: none;
   justify-content: center;
   align-items: center;
   position: absolute;
@@ -53,18 +53,21 @@ $yellow-color: #faff00;
     padding: 20px 0px;
     display: flex;
     flex-direction: column;
+    justify-content: start;
     align-items: center;
     li {
       width: 100%;
-      margin: 40px 0px;
+      margin: 5px 0px;
+      height: 60px;
       list-style: none;
       cursor: pointer;
       &:nth-of-type(1) {
         margin: 10px 0px;
         width: 100%;
+        height: initial;
         a {
-          margin: 0 auto;
-          display: block;
+          margin: auto auto;
+          display: inline-block;
 
           i {
             width: 100%;
@@ -74,24 +77,17 @@ $yellow-color: #faff00;
           }
         }
       }
-      a,
-      button {
+
+      button,
+      a {
         height: 100%;
         margin: 10px auto;
-      }
-      a {
-        text-decoration: none;
-        i {
-          color: white;
-          font-size: 30px;
-        }
-      }
-      button {
         width: 100%;
         background: none;
         padding: 0px 10px;
         outline: none;
         border: none;
+        text-decoration: none;
         cursor: pointer;
         display: flex;
         justify-content: flex-start;
@@ -107,7 +103,7 @@ $yellow-color: #faff00;
           color: white;
           font-size: 30px;
           display: block;
-          margin: 0px auto;
+          margin: auto auto;
         }
 
         &:hover {
@@ -130,7 +126,7 @@ $yellow-color: #faff00;
   }
 
   &:hover {
-    width: 200px;
+    min-width: 200px;
 
     ul {
       li {
@@ -139,9 +135,10 @@ $yellow-color: #faff00;
         &:nth-of-type(1) {
           width: auto;
         }
-        button {
+        button,
+        a {
           i {
-            margin-left: 20px;
+            // margin-left: 20px;
           }
           p {
             display: block;
@@ -156,7 +153,7 @@ $yellow-color: #faff00;
 }
 //Side Nav End
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 992px) {
   .side-nav-opener {
     display: flex;
   }
@@ -167,7 +164,8 @@ $yellow-color: #faff00;
     ul {
       li {
         width: 100%;
-        button {
+        button,
+        a {
           i {
             margin-left: 20px;
           }

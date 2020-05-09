@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import AllRequest from './AllRequest';
-import AllUsers from './AllUsers';
+import AllRequest from './Requests/AllRequest';
+import AllUsers from './Users/AllUsers';
 import PropTypes from 'prop-types';
 
 //redux
@@ -15,7 +15,7 @@ import { getAllDevices } from '../../redux/actions/deviceActions';
 
 //react router dom
 import { Link } from 'react-router-dom';
-import AllDevices from './AllDevices';
+import AllDevices from './Devices/AllDevices';
 import Page404 from '../404';
 
 class AdminPage extends Component {

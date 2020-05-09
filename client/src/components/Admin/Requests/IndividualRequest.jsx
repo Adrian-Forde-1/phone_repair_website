@@ -7,12 +7,12 @@ import ReactDOM from 'react-dom';
 import AllRequest from './AllRequest';
 
 //Redux
-import store from '../../redux/store';
+import store from '../../../redux/store';
 
 //Actions
-import { SET_ERRORS } from '../../redux/actions/types';
+import { SET_ERRORS } from '../../../redux/actions/types';
 
-import { getAllRequest } from '../../redux/actions/requestActions';
+import { getAllRequest } from '../../../redux/actions/requestActions';
 
 function IndividualRequest(props) {
   const requestStatus = {

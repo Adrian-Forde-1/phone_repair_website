@@ -3,14 +3,14 @@ import ReactDOM from 'react-dom';
 import axios from 'axios';
 
 //Components
-import ToastMessage from '../ToastMessage';
-import ToastError from '../ToastError';
+import ToastMessage from '../../ToastMessage';
+import ToastError from '../../ToastError';
 
 //Redux
-import store from '../../redux/store';
+import store from '../../../redux/store';
 
 //Actions
-import { getAllDevices } from '../../redux/actions/deviceActions';
+import { getAllDevices } from '../../../redux/actions/deviceActions';
 
 class AddDevice extends Component {
   constructor(props) {
