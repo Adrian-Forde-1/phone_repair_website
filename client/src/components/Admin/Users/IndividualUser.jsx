@@ -37,41 +37,44 @@ function IndividualUser(props) {
     Object.keys(user).length > 0 && (
       <div className="individual-user">
         <AdminSideBar />
-        <h1>
-          {user.fname} {user.lname}
-        </h1>
-        <p>
-          <span className="info-title">User Id:</span> {user._id}
-        </p>
-        <p>
-          <span className="info-title">Email:</span> {user.email}
-        </p>
-        {user.role === 'Customer' &&
-          (user.numberOfRequestCreated >= 0 ? (
-            <p>
-              <span className="info-title">Number of Request Created: </span>
-              {user.numberOfRequestCreated}
-            </p>
-          ) : (
-            <div></div>
-          ))}
-        {user.role === 'Customer' &&
-          (user.numberOfCurrentRequest >= 0 ? (
-            <p>
-              <span className="info-title">Number of Current Request: </span>
-              {user.numberOfCurrentRequest}
-            </p>
-          ) : (
-            <div></div>
-          ))}
-        <p>
-          <span className="info-title">Role: </span>
-          {user.role}
-        </p>
-        <p>
-          <span className="info-title">Created At: </span>
-          {user.createdAt.slice(0, 10)}
-        </p>
+        <h1>{user.fullname}</h1>
+        <div className="info-title">
+          <p>
+            <span>ID:</span> {user._id}
+          </p>
+        </div>
+        <div className="info-title">
+          <p>
+            <span>Create At:</span> {user.createdAt.slice(0, 10)}
+          </p>
+        </div>
+
+        <div className="individual-user-information ">
+          <div>
+            <h3>Email</h3>
+            <p>{user.email}</p>
+          </div>
+          <div>
+            <h3>Role</h3>
+            <p>{user.role}</p>
+          </div>
+          {user.role === 'Customer' && (
+            <div>
+              <h3>No. of Request Created</h3>
+              <p className="individual-user-big-text">
+                {user.numberOfRequestCreated}
+              </p>
+            </div>
+          )}
+          {user.role === 'Customer' && (
+            <div>
+              <h3>No. of Current Requests</h3>
+              <p className="individual-user-big-text">
+                {user.numberOfCurrentRequest}
+              </p>
+            </div>
+          )}
+        </div>
       </div>
     )
   );

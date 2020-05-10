@@ -22,7 +22,6 @@ function AdminSideBar() {
               <i className="fas fa-home"></i>
             </Link>
           </li>
-          <hr />
           <li>
             <Link to="/admin/users" id="render-users-btn">
               <i className="fas fa-users"></i>

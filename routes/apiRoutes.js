@@ -85,7 +85,7 @@ router.get(
   getAllDevices
 );
 router.get(
-  '/devices/:deviceId',
+  '/device/:deviceId',
   passportJWT,
   isUserAllowed(roles.Owner, roles.Admin),
   getDevice
@@ -119,7 +119,7 @@ router.delete(
   deleteTypeOfRepair
 );
 
-router.post(
+router.put(
   '/typeOfRepair/:typeOfRepairId/update',
   passportJWT,
   isUserAllowed(roles.Admin, roles.Owner),

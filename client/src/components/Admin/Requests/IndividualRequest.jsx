@@ -100,33 +100,42 @@ function IndividualRequest(props) {
         <h1>{request.usersname}</h1>
 
         <div className="individual-request-info-section">
-          <p>
-            <span className="info-title">User Id:</span> {request.createdBy._id}
-          </p>
-          <p>
-            <span className="info-title">Request Id:</span> {request._id}
-          </p>
-          <p>
-            <span className="info-title">Device:</span> {request.device}
-          </p>
-          <div className="individual-request-repair-types">
-            <span className="info-title">Types Of Repairs:</span>
+          <div className="info-title">
+            <p>
+              <span>User Id:</span> {request.createdBy._id}
+            </p>
+          </div>
+          <div className="info-title">
+            <p>
+              <span className="info-title">Request Id:</span> {request._id}
+            </p>
+          </div>
+          <div className="info-title">
+            <p>
+              <span className="info-title">Created On: </span>
+              {request.createdAt !== undefined &&
+                request.createdAt.slice(0, 10)}
+            </p>
+          </div>
 
+          <div className="individual-info-div">
+            <h3>Device</h3>
+            <p>{request.device}</p>
+          </div>
+
+          <div className="individual-info-div">
+            <h3>Types Of Repairs</h3>
             {request.typeOfRepairs.map((type) => (
-              <p key={type._id}>&mdash; {type.name}</p>
+              <p key={type._id}>{type.name}</p>
             ))}
           </div>
-          <p>
-            <span className="info-title">Description: </span>
-            {request.description}
-          </p>
-          <p>
-            <span className="info-title">Created On: </span>
-            {request.createdAt !== undefined && request.createdAt.slice(0, 10)}
-          </p>
-          <p>
-            <span className="info-title">Status:</span> {request.status}
-          </p>
+
+          <div className="individual-info-div">
+            <h3>Description</h3>
+            <div className="individual-request-description">
+              <p>{request.description}</p>
+            </div>
+          </div>
           <div className="request-cost">
             <h4></h4>
           </div>

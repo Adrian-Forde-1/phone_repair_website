@@ -7,6 +7,7 @@ import {
   LOADING_UI,
   STOP_LOADING_UI,
   CLEAR_ERRORS,
+  SET_MESSAGES,
 } from './types';
 
 //Axios
@@ -96,6 +97,9 @@ export const getAllUsers = (token) => (dispatch) => {
 
 export const setErrors = (error) => (dispatch) => {
   dispatch({ type: SET_ERRORS, payload: error.response.data });
+};
+export const setMessages = (message) => (dispatch) => {
+  dispatch({ type: SET_MESSAGES, payload: message.data });
 };
 
 export const setLoadingUI = () => (dispatch) => {

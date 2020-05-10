@@ -63,7 +63,7 @@ exports.deleteRequest = (req, res) => {
   if (req.params.requestId) {
     let messages = {};
     let errors = {};
-    const requestId = req.parmas.requestId;
+    const requestId = req.params.requestId;
     Request.findByIdAndDelete(requestId)
       .then((request) => {
         messages.request = 'Request successfully deleted';
@@ -194,7 +194,7 @@ exports.createDevice = async (req, res) => {
 
 exports.getDevice = (req, res) => {
   if (req.params.deviceId) {
-    const deviceId = req.parmas.deviceId;
+    const deviceId = req.params.deviceId;
     Device.findById(deviceId)
       .populate('createdBy')
       .then((device) => {

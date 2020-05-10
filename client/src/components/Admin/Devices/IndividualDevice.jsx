@@ -5,14 +5,13 @@ import ReactDOM from 'react-dom';
 //Components
 import ToastMessage from '../../ToastMessage';
 import ToastError from '../../ToastError';
-import AllDevices from './AllDevices';
 
 //Redux
-import store from '../../../redux/store';
+import { connect } from 'react-redux';
 
 //Actions
 import { getAllDevices } from '../../../redux/actions/deviceActions';
-import { SET_MESSAGES } from '../../../redux/actions/types';
+import { setErrors, setMessages } from '../../../redux/actions/userActions';
 
 class IndividualDevice extends Component {
   constructor(props) {
@@ -25,6 +24,7 @@ class IndividualDevice extends Component {
     this.setInitialState = this.setInitialState.bind(this);
 
     this.state = {
+      device: {},
       typeOfRepairs: [],
       initialIndex: null,
       inputIndex: null,
@@ -34,8 +34,22 @@ class IndividualDevice extends Component {
   }
 
   componentDidMount() {
+    const deviceId = this.props.match.params.deviceId;
     axios
-      .get(`/api/typeOfRepairs/${this.props.device._id}`, {
+      .get(`/api/device/${deviceId}`, {
+        headers: { Authorization: localStorage.getItem('token') },
+      })
+      .then((response) => {
+        this.setState({
+          device: response.data,
+        });
+      })
+      .catch((error) => {
+        this.props.setErrors(error);
+        this.props.history.goBack();
+      });
+    axios
+      .get(`/api/typeOfRepairs/${deviceId}`, {
         headers: { Authorization: localStorage.getItem('token') },
       })
       .then((response) => {
@@ -48,13 +62,15 @@ class IndividualDevice extends Component {
         });
       })
       .catch((error) => {
+        this.props.setErrors(error);
         console.log(error);
+        this.props.history.goBack();
       });
   }
 
   setInitialState = () => {
     axios
-      .get(`/api/typeOfRepairs/${this.props.device._id}`, {
+      .get(`/api/typeOfRepairs/${this.state.device._id}`, {
         headers: { Authorization: localStorage.getItem('token') },
       })
       .then((response) => {
@@ -67,7 +83,9 @@ class IndividualDevice extends Component {
         });
       })
       .catch((error) => {
+        this.props.setErrors(error);
         console.log(error);
+        this.props.history.goBack();
       });
   };
 
@@ -96,23 +114,15 @@ class IndividualDevice extends Component {
       .delete(`/api/device/${device._id}`, {
         headers: { Authorization: localStorage.getItem('token') },
       })
-      .then((device) => {
-        store.dispatch(getAllDevices(localStorage.getItem('token')));
-        const infoSection = document.querySelector('.admin-info-section');
-        var newDevices = [...store.getState().api.devices];
-
-        newDevices = newDevices.filter(
-          (device) =>
-            device.name.toLowerCase() !== this.props.device.name.toLowerCase()
-        );
-
-        ReactDOM.render(<AllDevices devices={newDevices} />, infoSection);
+      .then(() => {
+        this.props.getAllDevices(localStorage.getItem('token'));
+        this.props.history.replace('/admin/devices');
       });
   };
 
   onSaveChanges = () => {
     axios
-      .get(`/api/typeOfRepairs/${this.props.device._id}`, {
+      .get(`/api/typeOfRepairs/${this.state.device._id}`, {
         headers: { Authorization: localStorage.getItem('token') },
       })
       .then((response) => {
@@ -122,7 +132,7 @@ class IndividualDevice extends Component {
             info.cost !== this.state.typeOfRepairs[index].cost
           ) {
             axios
-              .post(
+              .put(
                 `/api/typeOfRepair/${info._id}/update`,
                 { typeOfRepair: this.state.typeOfRepairs[index] },
                 { headers: { Authorization: localStorage.getItem('token') } }
@@ -131,17 +141,15 @@ class IndividualDevice extends Component {
                 this.setState({
                   messages: response.data,
                 });
-                store.dispatch(getAllDevices(localStorage.getItem('token')));
-                store.dispatch({ type: SET_MESSAGES, payload: response.data });
               })
               .catch((error) => {
+                this.props.setErrors(error);
                 console.log(error);
-                this.setState({
-                  errors: response.data.error,
-                });
+                this.props.history.goBack();
               });
           }
         });
+        this.props.getAllDevices(localStorage.getItem('token'));
       })
       .then(() => {
         if (this.state.typeOfRepairs.length > this.state.initialIndex) {
@@ -152,10 +160,10 @@ class IndividualDevice extends Component {
           ) {
             axios
               .post(
-                `/api/${this.props.device._id}/typeOfRepair/create`,
+                `/api/${this.state.device._id}/typeOfRepair/create`,
                 {
                   data: this.state.typeOfRepairs[i],
-                  deviceName: this.props.device.name,
+                  deviceName: this.state.device.name,
                 },
                 { headers: { Authorization: localStorage.getItem('token') } }
               )
@@ -164,16 +172,15 @@ class IndividualDevice extends Component {
                   error: {},
                   messages: response.data,
                 });
-                store.dispatch({ type: SET_MESSAGES, payload: response.data });
+                this.props.setMessages(response);
               })
               .catch((error) => {
-                this.setState({
-                  messages: {},
-                  error: error.response.data,
-                });
+                this.props.setErrors(error);
+                console.log(error);
+                this.props.history.goBack();
               });
           }
-          store.dispatch(getAllDevices(localStorage.getItem('token')));
+          this.props.getAllDevices(localStorage.getItem('token'));
           this.setInitialState();
 
           const formTypeOfRepairsDivs = document.querySelectorAll(
@@ -185,11 +192,15 @@ class IndividualDevice extends Component {
         }
       })
       .catch((error) => {
+        this.props.setErrors(error);
         console.log(error);
+        this.props.history.goBack();
       });
   };
 
   render() {
+    const deviceId = this.props.match.params.deviceId;
+
     const deleteTypeOfRepair = async (typeId, e) => {
       const formTypeOfRepairsDivs = document.querySelectorAll(
         '#type-of-repairs div'
@@ -209,14 +220,13 @@ class IndividualDevice extends Component {
           });
         })
         .catch((error) => {
-          this.setState({
-            messages: {},
-            errors: error.response.data,
-          });
+          this.props.setErrors(error);
+          console.log(error);
+          this.props.history.goBack();
         });
 
       axios
-        .get(`/api/typeOfRepairs/${this.props.device._id}`, {
+        .get(`/api/typeOfRepairs/${deviceId}`, {
           headers: { Authorization: localStorage.getItem('token') },
         })
         .then((response) => {
@@ -227,7 +237,9 @@ class IndividualDevice extends Component {
           this.setInitialState();
         })
         .catch((error) => {
+          this.props.setErrors(error);
           console.log(error);
+          this.props.history.goBack();
         });
     };
 
@@ -290,68 +302,76 @@ class IndividualDevice extends Component {
     };
 
     return (
-      <div className="individual-device">
-        {this.state.messages !== null &&
-          this.state.messages['typeOfRepair'] && (
-            <ToastMessage message={this.state.messages.typeOfRepair} />
-          )}
-        {this.state.errors !== null && this.state.errors['typeOfRepair'] && (
-          <ToastError error={this.state.errors.typeOfRepair} />
-        )}
-        {this.state.errors !== null && this.state.errors['opps'] && (
-          <ToastError error={this.state.errors.opps} />
-        )}
-        <h1>{this.props.device.name}</h1>
-        <div>
-          <div className="device-type-of-repairs">
-            {this.state.typeOfRepairs.map((type, index) =>
-              index < this.state.initialIndex ? (
-                <div className="one-line" key={index}>
-                  <input
-                    type="text"
-                    value={type.name}
-                    onChange={this.onNameChange}
-                    data-index={index}
-                  />
-                  <input
-                    type="number"
-                    value={type.cost}
-                    onChange={this.onCostChange}
-                    data-index={index}
-                  />
-                  <button
-                    onClick={(e) => {
-                      deleteTypeOfRepair(type._id, e);
-                    }}
-                  >
-                    <i className="fas fa-minus"></i>
-                  </button>
-                </div>
-              ) : (
-                <div key={index}></div>
-              )
+      Object.keys(this.state.device).length > 0 && (
+        <div className="individual-device">
+          {this.state.messages !== null &&
+            this.state.messages['typeOfRepair'] && (
+              <ToastMessage message={this.state.messages.typeOfRepair} />
             )}
-          </div>
-          <div id="type-of-repairs"></div>
+          {this.state.errors !== null && this.state.errors['typeOfRepair'] && (
+            <ToastError error={this.state.errors.typeOfRepair} />
+          )}
+          {this.state.errors !== null && this.state.errors['opps'] && (
+            <ToastError error={this.state.errors.opps} />
+          )}
+          <h1>{this.state.device.name}</h1>
+          <div>
+            <div className="device-type-of-repairs">
+              {this.state.typeOfRepairs.map((type, index) =>
+                index < this.state.initialIndex ? (
+                  <div className="one-line" key={index}>
+                    <input
+                      type="text"
+                      value={type.name}
+                      onChange={this.onNameChange}
+                      data-index={index}
+                    />
+                    <input
+                      type="number"
+                      value={type.cost}
+                      onChange={this.onCostChange}
+                      data-index={index}
+                    />
+                    <button
+                      onClick={(e) => {
+                        deleteTypeOfRepair(type._id, e);
+                      }}
+                    >
+                      <i className="fas fa-minus"></i>
+                    </button>
+                  </div>
+                ) : (
+                  <div key={index}></div>
+                )
+              )}
+            </div>
+            <div id="type-of-repairs"></div>
 
-          <button className="add-input-field" onClick={addTypeOfRepair}>
-            <i className="fas fa-plus"></i>
-          </button>
+            <button className="add-input-field" onClick={addTypeOfRepair}>
+              <i className="fas fa-plus"></i>
+            </button>
+          </div>
+          <div className="device-save-changes-btn" onClick={this.onSaveChanges}>
+            <i className="far fa-save"></i>
+          </div>
+          <div
+            className="remove-device-btn"
+            onClick={(e) => {
+              this.deleteDevice(this.state.device, e);
+            }}
+          >
+            <i className="fas fa-minus"></i>
+          </div>
         </div>
-        <div className="device-save-changes-btn" onClick={this.onSaveChanges}>
-          <i className="far fa-save"></i>
-        </div>
-        <div
-          className="remove-device-btn"
-          onClick={(e) => {
-            this.deleteDevice(this.props.device, e);
-          }}
-        >
-          <i className="fas fa-minus"></i>
-        </div>
-      </div>
+      )
     );
   }
 }
 
-export default IndividualDevice;
+const mapDispatchToProps = {
+  setErrors,
+  getAllDevices,
+  setMessages,
+};
+
+export default connect(null, mapDispatchToProps)(IndividualDevice);

@@ -36,25 +36,24 @@ $yellow-color: #faff00;
 
 .side-nav {
   height: 100%;
-  min-width: 75px;
+  min-width: 5%;
   max-width: auto;
-  background: linear-gradient($darker-blue-color, $blue-color);
+  background: $blue-color;
   position: fixed;
   left: 0;
   top: 0;
-  display: flex;
-  justify-content: space-evenly;
   z-index: 1000;
   transition: all 300ms ease;
 
   ul {
     width: 100%;
     height: 100%;
-    padding: 20px 0px;
-    display: flex;
-    flex-direction: column;
-    justify-content: start;
-    align-items: center;
+    padding: 0px 0px 20px 0px;
+    overflow: hidden;
+    // display: flex;
+    // flex-direction: column;
+    // justify-content: start;
+    // align-items: center;
     li {
       width: 100%;
       margin: 5px 0px;
@@ -62,48 +61,54 @@ $yellow-color: #faff00;
       list-style: none;
       cursor: pointer;
       &:nth-of-type(1) {
-        margin: 10px 0px;
-        width: 100%;
+        margin: 0px;
+        height: 60px !important;
         height: initial;
+        box-shadow: 0px 3px 5px #444141;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: $darker-blue-color;
         a {
-          margin: auto auto;
-          display: inline-block;
+          width: 100%;
 
           i {
             width: 100%;
-            margin: 0 auto;
-            display: block;
             text-align: center;
           }
         }
+      }
+      &:nth-of-type(2) {
+        margin-top: 20px !important;
       }
 
       button,
       a {
         height: 100%;
-        margin: 10px auto;
+        margin: 0px auto;
         width: 100%;
         background: none;
-        padding: 0px 10px;
-        outline: none;
+        padding: 0px 20px;
         border: none;
         text-decoration: none;
         cursor: pointer;
         display: flex;
-        justify-content: flex-start;
+        justify-content: space-between;
+        align-items: center;
         p {
           display: none;
-          visibility: visible;
+          visibility: hidden;
           opacity: 0;
+          text-align: right;
           color: white;
-          transition: opacity 300ms;
+          transition: opacity 300ms, visibility 300ms;
         }
 
         i {
           color: white;
           font-size: 30px;
-          display: block;
           margin: auto auto;
+          text-align: center;
         }
 
         &:hover {
@@ -126,12 +131,11 @@ $yellow-color: #faff00;
   }
 
   &:hover {
-    min-width: 200px;
+    min-width: 15%;
 
     ul {
       li {
         width: 100%;
-        border: 1px solid red;
 
         &:nth-of-type(1) {
           width: auto;
@@ -139,11 +143,13 @@ $yellow-color: #faff00;
         button,
         a {
           justify-content: space-between;
-          border: 2px solid lime;
           p {
             display: block;
             visibility: visible;
             opacity: 1;
+          }
+          i {
+            margin: 0px;
           }
         }
       }
@@ -158,7 +164,7 @@ $yellow-color: #faff00;
   }
   .side-nav {
     transform: translateX(-200px);
-    width: 200px;
+    width: 15%;
 
     ul {
       li {
