@@ -18,8 +18,8 @@
 }
 
 .loading > div {
-  width: 3rem;
-  height: 3rem;
+  width: 2rem;
+  height: 2rem;
   background: -webkit-gradient(linear, left top, right top, from(#212d9a), to(#14cca7));
   background: linear-gradient(90deg, #212d9a, #14cca7);
   border-radius: 50%;

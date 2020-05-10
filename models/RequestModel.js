@@ -29,7 +29,7 @@ const requestSchema = new mongoose.Schema({
   description: {
     type: String,
     required: true,
-    maxlength: 200,
+    maxlength: 250,
   },
   status: {
     type: String,

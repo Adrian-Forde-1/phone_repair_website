@@ -19,13 +19,15 @@ import { useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import CreateRequest from './components/Client/CreateRequest';
 import AllClientRequest from './components/Client/AllClientRequest';
-import IndividualRequest from './components/Client/IndividualRequest';
 import ScrollToTop from './components/ScrollToTop';
 import AllUsers from './components/Admin/Users/AllUsers';
 import AllRequest from './components/Admin/Requests/AllRequest';
 import AllDevices from './components/Admin/Devices/AllDevices';
 import Dashboard from './components/Admin/Dashboard';
 import IndividualUser from './components/Admin/Users/IndividualUser';
+import IndividualDevice from './components/Admin/Devices/IndividualDevice';
+import IndividualRequest from './components/Client/IndividualRequest';
+import IndividualAdminRequest from './components/Admin/Requests/IndividualRequest';
 
 function App(props) {
   const { loading } = props;
@@ -66,6 +68,14 @@ function App(props) {
             <Route path="/admin/requests" component={AllRequest} />
             <Route path="/admin/devices" component={AllDevices} />
             <Route path="/admin/user/:userId" component={IndividualUser} />
+            <Route
+              path="/admin/request/:requestId"
+              component={IndividualAdminRequest}
+            />
+            <Route
+              path="/admin/device/:deviceId"
+              component={IndividualDevice}
+            />
 
             <Route exact path="/request" component={CreateRequest} />
             <Route exact path="/requests" component={AllClientRequest} />

@@ -43,29 +43,45 @@ class AllRequest extends Component {
           <div className="request-preview-container">
             {this.state.search === ''
               ? this.state.filter === 'All'
-                ? this.props.requests.map((request) => (
-                    <RequestPreview request={request} key={request._id} />
+                ? this.props.requests.map((request, index) => (
+                    <RequestPreview
+                      request={request}
+                      requestIndex={index}
+                      key={request._id}
+                    />
                   ))
                 : this.props.requests.map(
-                    (request) =>
+                    (request, index) =>
                       request.status.toLowerCase() ===
                         this.state.filter.toLowerCase() && (
-                        <RequestPreview request={request} key={request._id} />
+                        <RequestPreview
+                          request={request}
+                          requestIndex={index}
+                          key={request._id}
+                        />
                       )
                   )
-              : this.props.requests.map((request) =>
+              : this.props.requests.map((request, index) =>
                   this.state.filter === 'All'
                     ? request.usersname
                         .toLowerCase()
                         .indexOf(this.state.search.toLowerCase()) > -1 && (
-                        <RequestPreview request={request} key={request._id} />
+                        <RequestPreview
+                          request={request}
+                          requestIndex={index}
+                          key={request._id}
+                        />
                       )
                     : request.status.toLowerCase() ===
                         this.state.filter.toLowerCase() &&
                       request.usersname
                         .toLowerCase()
                         .indexOf(this.state.search.toLowerCase()) > -1 && (
-                        <RequestPreview request={request} key={request._id} />
+                        <RequestPreview
+                          request={request}
+                          requestIndex={index}
+                          key={request._id}
+                        />
                       )
                 )}
           </div>

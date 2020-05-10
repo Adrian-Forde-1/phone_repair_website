@@ -570,8 +570,6 @@ footer {
 
   select {
     margin-right: auto;
-    border-top-right-radius: 10px;
-    border-bottom-right-radius: 10px;
     background: $darker-blue-color;
     color: white;
     outline: none;
@@ -657,6 +655,7 @@ footer {
 }
 
 .request-preview {
+  position: relative;
   height: 30vh;
   max-width: 400px;
   color: white;
@@ -676,6 +675,7 @@ footer {
   h3 {
     text-align: center;
     margin-bottom: 10px;
+    font-size: 24px;
   }
 
   p {
@@ -694,17 +694,20 @@ footer {
   height: 1rem;
   display: block;
   border-radius: 50%;
-  background-color: white;
 }
 
-.request-repair-types {
+.request-preview-repair-types {
   display: flex;
   align-items: center;
   margin-bottom: 10px;
 }
 
-.request-status {
-  padding-right: 10px;
+.request-preview-status {
+  width: 100%;
+  position: absolute;
+  bottom: 30px;
+  left: 0px;
+  padding: 0px 30px 0px 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;

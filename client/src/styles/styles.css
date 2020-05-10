@@ -454,8 +454,8 @@
 }
 
 .loading > div {
-  width: 3rem;
-  height: 3rem;
+  width: 2rem;
+  height: 2rem;
   background: -webkit-gradient(linear, left top, right top, from(#212d9a), to(#14cca7));
   background: linear-gradient(90deg, #212d9a, #14cca7);
   border-radius: 50%;
@@ -673,16 +673,24 @@
 
 .side-nav:hover ul li {
   width: 100%;
+  border: 1px solid red;
 }
 
 .side-nav:hover ul li:nth-of-type(1) {
   width: auto;
 }
 
+.side-nav:hover ul li button,
+.side-nav:hover ul li a {
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  border: 2px solid lime;
+}
+
 .side-nav:hover ul li button p,
 .side-nav:hover ul li a p {
   display: block;
-  margin: auto;
   visibility: visible;
   opacity: 1;
 }
@@ -1344,8 +1352,6 @@ footer p {
 
 .search-bar select {
   margin-right: auto;
-  border-top-right-radius: 10px;
-  border-bottom-right-radius: 10px;
   background: #212d9a;
   color: white;
   outline: none;
@@ -1437,6 +1443,7 @@ footer p {
 }
 
 .request-preview {
+  position: relative;
   height: 30vh;
   max-width: 400px;
   color: white;
@@ -1457,6 +1464,7 @@ footer p {
 .request-preview h3 {
   text-align: center;
   margin-bottom: 10px;
+  font-size: 24px;
 }
 
 .request-preview p {
@@ -1472,10 +1480,9 @@ footer p {
   height: 1rem;
   display: block;
   border-radius: 50%;
-  background-color: white;
 }
 
-.request-repair-types {
+.request-preview-repair-types {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1485,8 +1492,12 @@ footer p {
   margin-bottom: 10px;
 }
 
-.request-status {
-  padding-right: 10px;
+.request-preview-status {
+  width: 100%;
+  position: absolute;
+  bottom: 30px;
+  left: 0px;
+  padding: 0px 30px 0px 20px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1498,7 +1509,7 @@ footer p {
           align-items: center;
 }
 
-.request-status p {
+.request-preview-status p {
   font-weight: lighter;
 }
 

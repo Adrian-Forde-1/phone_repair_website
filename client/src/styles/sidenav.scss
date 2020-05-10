@@ -131,18 +131,17 @@ $yellow-color: #faff00;
     ul {
       li {
         width: 100%;
+        border: 1px solid red;
 
         &:nth-of-type(1) {
           width: auto;
         }
         button,
         a {
-          i {
-            // margin-left: 20px;
-          }
+          justify-content: space-between;
+          border: 2px solid lime;
           p {
             display: block;
-            margin: auto;
             visibility: visible;
             opacity: 1;
           }

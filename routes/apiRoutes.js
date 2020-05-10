@@ -63,7 +63,7 @@ router.delete(
   deleteRequest
 );
 
-router.post(
+router.put(
   '/request/:requestId/status',
   passportJWT,
   isUserAllowed(roles.Owner, roles.Admin),

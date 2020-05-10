@@ -82,36 +82,64 @@ exports.deleteRequest = (req, res) => {
 };
 
 exports.changeRequestStatus = (req, res) => {
-  console.log('Change status called');
   if (req.params.requestId) {
-    let messages = {};
     let errors = {};
     const requestId = req.params.requestId;
     const status = req.body.status;
-    Request.findByIdAndUpdate(requestId, { status: status })
-      .then((request) => {
-        if (status === 'Completed') {
-          User.findById(request.createdBy).then((user) => {
-            var currentNumOfActiveRequest =
-              parseInt(user.numberOfCurrentRequest) - 1;
-            currentNumOfActiveRequest = parseInt(currentNumOfActiveRequest);
-            if (currentNumOfActiveRequest < 0) currentNumOfActiveRequest = 0;
-            User.findByIdAndUpdate(user._id, {
-              numberOfCurrentRequest: currentNumOfActiveRequest,
-            }).then(() => {
-              messages.request = 'Request successfully updated';
-              return res.json(messages);
-            });
-          });
-        } else {
-          messages.request = 'Request successfully updated';
-          return res.json(messages);
-        }
-      })
-      .catch((error) => {
-        errors.opps = 'Opps! Something went wrong';
+
+    //Update the request's status
+    Request.findByIdAndUpdate(requestId, { status: status }).exec(function (
+      err,
+      request
+    ) {
+      //Error occured? Notify User
+      if (err) {
+        errors.request = 'Opps! Something went wrong';
         return res.status(500).json(errors);
-      });
+      }
+
+      if (status === 'Completed') {
+        //If the request is completed, remove one from user active requests
+        User.findById(request.createdBy).exec(function (err, user) {
+          //Error occured? Notify User
+          if (err) {
+            error.request =
+              'Error occured updating user with new request information';
+            return res.status(500).json(errors);
+          }
+          //Minus one from user's current requests
+          var numberOfCurrentRequest =
+            parseInt(user.numberOfCurrentRequest) - 1;
+
+          //Cast the numberOfCurrentRequest to an int again because I had some errors in
+          //the past
+          numberOfCurrentRequest = parseInt(numberOfCurrentRequest);
+
+          //If the user's numberOfCurrentRequest is less than zero, make it zero
+          if (numberOfCurrentRequest < 0) numberOfCurrentRequest = 0;
+
+          //Update the user with the current number of requests
+          User.findByIdAndUpdate(user._id, {
+            numberOfCurrentRequest: numberOfCurrentRequest,
+          }).exec(function (err, user) {
+            //Error occured? Notify User
+            if (err) {
+              error.request =
+                "Error occured updating user's current active requests";
+              return res.status(500).json(errors);
+            }
+
+            //Return the requests
+            request.status = status;
+            return res.json(request);
+          });
+        });
+      } else {
+        //Return the requests
+        request.status = status;
+        return res.json(request);
+      }
+    });
   } else {
     let errors = {};
     errors.request = 'Request not found';
