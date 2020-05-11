@@ -69,7 +69,7 @@ function Navbar(props) {
             user !== undefined &&
             user.role === 'Customer' && (
               <li className="nav-link">
-                <a href="/requests">My Requests</a>
+                <Link to="/requests">My Requests</Link>
               </li>
             )}
           {authenticated === true &&
