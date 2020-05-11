@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 
+//React Router DOM
+import { Link } from 'react-router-dom';
+
 //Redux
 import { connect } from 'react-redux';
 
@@ -11,7 +14,6 @@ import { getAllDevices } from '../../../redux/actions/deviceActions';
 //Components
 import AdminSideBar from '../AdminSideBar';
 import IndividualDevice from './IndividualDevice';
-import AddDevice from './AddDevice';
 import DevicePreview from '../Previews/DevicePreview';
 
 class AllDevices extends Component {
@@ -19,8 +21,6 @@ class AllDevices extends Component {
     super(props);
 
     this.onSearchChange = this.onSearchChange.bind(this);
-    this.renderIndividualDevice = this.renderIndividualDevice.bind(this);
-    this.addDevice = this.addDevice.bind(this);
 
     this.state = {
       search: '',
@@ -35,19 +35,6 @@ class AllDevices extends Component {
     this.setState({
       [e.target.name]: e.target.value.toLowerCase(),
     });
-  };
-
-  renderIndividualDevice = (device, messages) => {
-    const infoSection = document.querySelector('.admin-info-section');
-    ReactDOM.render(
-      <IndividualDevice device={device} messages={messages} />,
-      infoSection
-    );
-  };
-
-  addDevice = () => {
-    const infoSection = document.querySelector('.admin-info-section');
-    ReactDOM.render(<AddDevice />, infoSection);
   };
 
   render() {
@@ -81,9 +68,9 @@ class AllDevices extends Component {
           <div>There are currently no devices</div>
         )}
 
-        <div className="add-device-btn" onClick={this.addDevice}>
+        <Link to="/admin/adddevice" className="add-device-btn">
           <i className="fas fa-plus"></i>
-        </div>
+        </Link>
       </div>
     );
   }

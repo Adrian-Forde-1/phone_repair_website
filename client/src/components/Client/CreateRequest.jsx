@@ -161,6 +161,9 @@ class CreateRequest extends Component {
 
             <form className="form" onSubmit={this.handleSubmit}>
               <h1 className="form-title">Create Request</h1>
+              <p className="current-number-of-requests">
+                {this.props.user.numberOfCurrentRequest} / 2
+              </p>
               <div className="form-input-group">
                 <select
                   name="device"

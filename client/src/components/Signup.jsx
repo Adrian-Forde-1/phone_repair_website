@@ -147,7 +147,9 @@ class Signup extends Component {
               </div>
             )}
           </div>
-          <input className="submit-btn" type="submit" />
+          <button className="submit-btn" type="submit">
+            Sign Up
+          </button>
 
           <div className="bottom-text">
             Have an account? <Link to="/login">Login</Link>

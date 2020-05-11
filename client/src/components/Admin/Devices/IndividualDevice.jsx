@@ -2,16 +2,17 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import ReactDOM from 'react-dom';
 
-//Components
-import ToastMessage from '../../ToastMessage';
-import ToastError from '../../ToastError';
-
 //Redux
 import { connect } from 'react-redux';
 
 //Actions
 import { getAllDevices } from '../../../redux/actions/deviceActions';
 import { setErrors, setMessages } from '../../../redux/actions/userActions';
+
+//Components
+import ToastMessage from '../../ToastMessage';
+import ToastError from '../../ToastError';
+import AdminSideBar from '../AdminSideBar';
 
 class IndividualDevice extends Component {
   constructor(props) {
@@ -303,7 +304,8 @@ class IndividualDevice extends Component {
 
     return (
       Object.keys(this.state.device).length > 0 && (
-        <div className="individual-device">
+        <div className="individual-device p-l-75">
+          <AdminSideBar />
           {this.state.messages !== null &&
             this.state.messages['typeOfRepair'] && (
               <ToastMessage message={this.state.messages.typeOfRepair} />

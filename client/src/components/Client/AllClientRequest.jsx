@@ -2,16 +2,17 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 
-//Components
-import Page404 from '../404';
-import RequestPreview from './RequestPreview';
-
 //readt redux
 import { connect } from 'react-redux';
 import store from '../../redux/store';
 
 //Action
 import { LOADING_UI, STOP_LOADING_UI } from '../../redux/actions/types';
+
+//Components
+import Page404 from '../404';
+import RequestPreview from './RequestPreview';
+import SearchAndSelect from '../Util/SearchAndSelect';
 
 class AllClientRequest extends Component {
   constructor(props) {
@@ -21,7 +22,7 @@ class AllClientRequest extends Component {
 
     this.state = {
       allRequests: [],
-      filter: 'Pending Acceptance',
+      filter: 'All',
       search: '',
     };
   }
@@ -53,40 +54,52 @@ class AllClientRequest extends Component {
       if (this.props.user.role === 'Customer') {
         return (
           <div className="client-info-section">
-            <form className="search-bar">
-              <input
-                type="search"
-                name="search"
-                onChange={this.onChange}
-                placeholder="Search by device's name"
-              />
-              <select name="filter" id="filter" onChange={this.onChange}>
-                <option value="Pending Acceptance">Pending Acceptance</option>
-                <option value="Awaiting Device">Awaiting Device</option>
-                <option value="Being Repaired">Being Repaired</option>
-                <option value="Completed">Completed</option>
-              </select>
-            </form>
+            <SearchAndSelect onChange={this.onChange} />
 
             {this.state.allRequests ? (
-              <div className="request-container">
+              <div className="request-preview-container">
                 {this.state.search === ''
-                  ? this.state.allRequests.map(
-                      (request) =>
-                        request.status.toLowerCase() ===
-                          this.state.filter.toLowerCase() && (
-                          <RequestPreview request={request} key={request._id} />
-                        )
-                    )
-                  : this.state.allRequests.map(
-                      (request) =>
-                        request.status.toLowerCase() ===
-                          this.state.filter.toLowerCase() &&
-                        request.device
-                          .toLowerCase()
-                          .indexOf(this.state.search.toLowerCase()) > -1 && (
-                          <RequestPreview request={request} key={request._id} />
-                        )
+                  ? this.state.filter === 'All'
+                    ? this.state.allRequests.map((request, index) => (
+                        <RequestPreview
+                          request={request}
+                          requestIndex={index}
+                          key={request._id}
+                        />
+                      ))
+                    : this.state.allRequests.map(
+                        (request, index) =>
+                          request.status.toLowerCase() ===
+                            this.state.filter.toLowerCase() && (
+                            <RequestPreview
+                              request={request}
+                              requestIndex={index}
+                              key={request._id}
+                            />
+                          )
+                      )
+                  : this.state.allRequests.map((request, index) =>
+                      this.state.filter === 'All'
+                        ? request.usersname
+                            .toLowerCase()
+                            .indexOf(this.state.search.toLowerCase()) > -1 && (
+                            <RequestPreview
+                              request={request}
+                              requestIndex={index}
+                              key={request._id}
+                            />
+                          )
+                        : request.status.toLowerCase() ===
+                            this.state.filter.toLowerCase() &&
+                          request.usersname
+                            .toLowerCase()
+                            .indexOf(this.state.search.toLowerCase()) > -1 && (
+                            <RequestPreview
+                              request={request}
+                              requestIndex={index}
+                              key={request._id}
+                            />
+                          )
                     )}
               </div>
             ) : (

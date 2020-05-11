@@ -2,15 +2,16 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 
-//Components
-import ToastMessage from '../../ToastMessage';
-import ToastError from '../../ToastError';
-
 //Redux
-import store from '../../../redux/store';
+import { connect } from 'react-redux';
 
 //Actions
 import { getAllDevices } from '../../../redux/actions/deviceActions';
+
+//Components
+import ToastMessage from '../../ToastMessage';
+import ToastError from '../../ToastError';
+import AdminSideBar from '../AdminSideBar';
 
 class AddDevice extends Component {
   constructor(props) {
@@ -84,10 +85,7 @@ class AddDevice extends Component {
         { headers: { Authorization: localStorage.getItem('token') } }
       )
       .then((response) => {
-        // this.props.getAllDevices(localStorage.getItem('token'));
-        store.dispatch(getAllDevices(localStorage.getItem('token')));
-
-        console.log(response.data);
+        this.props.getAllDevices(localStorage.getItem('token'));
 
         this.setState({
           deviceName: '',
@@ -164,7 +162,8 @@ class AddDevice extends Component {
       ReactDOM.render(TypeOfRepair, element);
     };
     return (
-      <div className="auth-container">
+      <div className="auth-container p-l-75">
+        <AdminSideBar />
         {Object.keys(this.state.messages).length > 0 &&
           this.state.messages['device'] !== null && (
             <ToastMessage message={this.state.messages.device} />
@@ -203,4 +202,8 @@ class AddDevice extends Component {
   }
 }
 
-export default AddDevice;
+const mapDispatchToProps = {
+  getAllDevices,
+};
+
+export default connect(null, mapDispatchToProps)(AddDevice);

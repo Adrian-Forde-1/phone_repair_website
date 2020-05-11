@@ -1,6 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+
+//React Router DOM
+import { withRouter } from 'react-router-dom';
 
 function SearchAndSelect(props) {
+  useEffect(() => {
+    if (props.history.location.pathname.indexOf('admin') > -1)
+      document.querySelector('.search-bar').classList.add('admin-search');
+  }, [props.history.location.pathname]);
   return (
     <div className="search-bar">
       <input
@@ -20,4 +27,4 @@ function SearchAndSelect(props) {
   );
 }
 
-export default SearchAndSelect;
+export default withRouter(SearchAndSelect);

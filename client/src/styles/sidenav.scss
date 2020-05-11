@@ -8,13 +8,14 @@ $yellow-color: #faff00;
 //Side Nav Start
 .side-nav-opener {
   height: 20px;
-  width: 50px;
+  max-width: 50px;
   color: white;
   display: none;
   justify-content: center;
   align-items: center;
   position: absolute;
   top: 20px;
+  left: 20px;
   padding: 15px 10px;
   background: $blue-color;
   cursor: pointer;
@@ -164,7 +165,7 @@ $yellow-color: #faff00;
   }
   .side-nav {
     transform: translateX(-200px);
-    width: 15%;
+    width: 200px;
 
     ul {
       li {

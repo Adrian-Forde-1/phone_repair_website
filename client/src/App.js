@@ -28,6 +28,7 @@ import IndividualUser from './components/Admin/Users/IndividualUser';
 import IndividualDevice from './components/Admin/Devices/IndividualDevice';
 import IndividualRequest from './components/Client/IndividualRequest';
 import IndividualAdminRequest from './components/Admin/Requests/IndividualRequest';
+import AddDevice from './components/Admin/Devices/AddDevice';
 
 function App(props) {
   const { loading } = props;
@@ -64,6 +65,7 @@ function App(props) {
             <Route exact path="/signup" component={Signup} />
 
             <Route exact path="/admin/dashboard" component={Dashboard} />
+            <Route exact path="/admin/adddevice" component={AddDevice} />
             <Route path="/admin/users" component={AllUsers} />
             <Route path="/admin/requests" component={AllRequest} />
             <Route path="/admin/devices" component={AllDevices} />

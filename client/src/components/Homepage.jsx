@@ -34,16 +34,16 @@ class Homepage extends Component {
               <div className="header-content">
                 <h2>Cellphone Repairs</h2>
                 <p>
-                  Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                  Minima necessitatibus autem ducimus accusamus temporibus
-                  quibusdam.
+                  #1 Online Phone Repair Service. Quick, reliable and precise,
+                  we strive to make our customers happy and be their first
+                  choice for any device repairs
                 </p>
                 <button className="call-to-action-btn">
                   {authenticated === true ? (
                     user.role === 'Customer' ? (
                       <Link to="/request">Create a Request</Link>
                     ) : (
-                      <Link to="/admin/dashboard">Dashboard</Link>
+                      <Link to="/admin/requests">Requests</Link>
                     )
                   ) : (
                     <Link to="/signup">Sign Up</Link>
@@ -118,7 +118,7 @@ class Homepage extends Component {
               <p>
                 <span>"</span> Fast and efficent. Sent my phone in for repair
                 and it was ready for pickup later that same day. These guys know
-                what they are doing!. <span>"</span>
+                what they are doing! <span>"</span>
               </p>
             </div>
             <div className="testimonial-item">

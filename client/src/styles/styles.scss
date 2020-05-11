@@ -6,7 +6,7 @@
 $purple-color: #c314cc;
 $pink-color: #ff40b1;
 $blue-color: #14cca7;
-$green-color: #000000;
+$green-color: #00ff00;
 $darker-blue-color: #212d9a;
 $yellow-color: #faff00;
 
@@ -38,6 +38,12 @@ body {
     background-color: $darker-blue-color;
   }
 }
+
+//Utility Start
+.p-l-75 {
+  padding-left: 75px !important;
+}
+//Utility End
 
 .toast-error {
   background: rgba(255, 0, 0, 0.7);
@@ -83,7 +89,7 @@ body {
   height: 100%;
   position: relative;
   margin: 0px auto 0px auto;
-  padding-bottom: 20px;
+  padding-bottom: 50px;
 
   .homepage-header {
     width: 100%;
@@ -101,17 +107,6 @@ body {
       width: 30%;
       top: 25%;
       left: 20%;
-    }
-
-    .header-text {
-      h2 {
-        text-align: center;
-        margin-bottom: 10px;
-      }
-      p {
-        text-align: left;
-        font-size: 12px;
-      }
     }
 
     img {
@@ -161,6 +156,17 @@ body {
       //   height: 50px;
       // }
     }
+  }
+}
+
+.header-text {
+  h2 {
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  p {
+    text-align: left;
+    font-size: 12px;
   }
 }
 
@@ -220,25 +226,22 @@ section {
 }
 
 .quirks {
+  width: 100%;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 20px;
-  width: 100%;
+  justify-content: center;
 
   .quirk-item {
     display: flex;
     flex-direction: column;
     align-items: center;
     height: auto;
+    margin: 0 auto;
     padding: 20px 50px;
     box-shadow: 0.5px 0.5px 5px 1px grey;
 
     h3 {
-      //     display: block;
-      //     background: linear-gradient(90deg, $blue-color, $pink-color);
-      // -webkit-background-clip: text;
-      // -webkit-text-fill-color: transparent;
-
       color: $darker-blue-color;
       margin: 15px 0px 30px 0px;
     }
@@ -420,7 +423,14 @@ section {
   }
 }
 
+.current-number-of-requests {
+  text-align: center;
+  font-weight: bold;
+  font-size: 20px;
+}
+
 .create-request-container {
+  padding-top: 100px;
   .form-input-group {
     border: none;
   }
@@ -550,6 +560,7 @@ footer {
 .admin-page {
   overflow-x: hidden;
 }
+
 .search-bar {
   width: 100%;
   display: flex;
@@ -606,7 +617,7 @@ footer {
   width: 100%;
   min-height: 100vh;
   max-height: auto;
-  padding: 80px 20px 0px 20px;
+  padding: 80px 20px 50px 20px;
 
   .request-container {
     display: grid;
@@ -694,25 +705,31 @@ footer {
 
 .request-preview-container {
   width: 100%;
+  margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  justify-content: center;
   gap: 10px;
 }
 
 .request-preview {
-  position: relative;
   height: 30vh;
   max-width: 400px;
+  width: 100%;
+  position: relative;
   color: white;
   padding: 20px;
+  margin: 0 auto;
   background-image: url('../resources/images/User_Background.svg');
   background-repeat: no-repeat;
   background-size: cover;
-  margin: 0px !important;
+  margin: 0px auto !important;
   cursor: pointer;
   font-family: 'Roboto', sans-serif;
 
   a {
+    width: 100%;
+    height: 100%;
     text-decoration: none;
     color: white;
   }
@@ -766,9 +783,10 @@ footer {
   width: 100%;
   min-height: 100vh;
   max-height: auto;
+  padding-bottom: 50px;
   .individual-request {
     position: relative;
-    top: 65px;
+    top: 85px;
   }
 }
 
@@ -958,7 +976,7 @@ footer {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 0px auto;
+  margin: 50px auto 0px auto;
 
   .toast {
     top: 0px;
@@ -1085,9 +1103,6 @@ div[class*='type-of-repair'] {
         width: 50%;
         transform: translate(-50%, 0%);
       }
-      .header-text {
-        text-align: center;
-      }
 
       .call-to-action-btn {
         a {
@@ -1102,8 +1117,22 @@ div[class*='type-of-repair'] {
     }
   }
 
-  .search-bar {
-    margin-left: 80px;
+  .admin-search {
+    padding-left: 50px;
+  }
+
+  .header-text {
+    .header-content {
+      h2 {
+        font-size: 40px;
+        white-space: nowrap;
+        text-align: center;
+      }
+
+      p {
+        text-align: center;
+      }
+    }
   }
 
   .form {
@@ -1132,6 +1161,10 @@ div[class*='type-of-repair'] {
     width: 80%;
   }
 
+  .individual-request-description {
+    width: 600px;
+  }
+
   .admin-info-div {
     padding-left: 20px;
   }
@@ -1147,11 +1180,18 @@ div[class*='type-of-repair'] {
     h2 {
       font-size: 18px;
     }
-    .header-text {
-      width: 100%;
-      display: block;
-      position: static;
-      font-size: 12px;
+  }
+  .header-text {
+    width: 100%;
+    display: block;
+    position: static;
+    font-size: 12px;
+
+    .header-content {
+      h2 {
+        font-size: 35px;
+        white-space: nowrap;
+      }
     }
   }
 
@@ -1197,6 +1237,11 @@ div[class*='type-of-repair'] {
     font-size: 25px;
   }
 
+  .individual-request-description {
+    width: 400px;
+    font-size: 14px;
+  }
+
   footer {
     a,
     p {
@@ -1235,6 +1280,14 @@ div[class*='type-of-repair'] {
 }
 
 @media screen and (max-width: 567px) {
+  .header-text {
+    .header-content {
+      h2 {
+        font-size: 25px;
+        white-space: nowrap;
+      }
+    }
+  }
   .form {
     width: 100%;
   }
@@ -1298,6 +1351,11 @@ div[class*='type-of-repair'] {
     }
   }
 
+  .individual-request-description {
+    width: 300px;
+    font-size: 10px;
+  }
+
   .homepage-header {
     h2 {
       font-size: 18px;
@@ -1318,8 +1376,15 @@ div[class*='type-of-repair'] {
   }
 }
 
-// @media screen and (max-height: 400px) {
-//   .individual-request {
-//     min-height: 120vh;
-//   }
-// }
+@media screen and (max-width: 400px) {
+  .search-bar {
+    input {
+      width: 250px;
+      font-size: 10px;
+    }
+
+    select {
+      font-size: 10px;
+    }
+  }
+}
