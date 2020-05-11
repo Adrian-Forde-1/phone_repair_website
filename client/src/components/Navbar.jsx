@@ -13,17 +13,17 @@ import { logoutUser } from '../redux/actions/userActions';
 
 function Navbar(props) {
   useEffect(() => {
-    console.log(props.location.pathname);
+    console.log(props.history.location.pathname);
     if (
-      props.history.location.pathname === '/' ||
-      props.history.location.pathname === '/request'
+      props.history.location.pathname.toString() === '/' ||
+      props.history.location.pathname.toString() === '/request'
     ) {
       document.querySelector('.navbar').style.background = 'transparent';
-    } else if (props.history.location.pathname === '/requests') {
-      document.querySelector('.navbar').style.background =
-        'linear-gradient(90deg, $blue-color, $darker-blue-color)';
     }
-
+    // else {
+    //   document.querySelector('.navbar').style.background =
+    //     'linear-gradient(90deg, $blue-color, $darker-blue-color)';
+    // }
     // if (
     //   (props.location.pathname !== '/' &&
     //    props.history.location.pathname.indexOf('admin') > -1) ||
@@ -38,7 +38,12 @@ function Navbar(props) {
 
   if (props.history.location.pathname.indexOf('admin') <= -1) {
     return (
-      <nav className="navbar">
+      <nav
+        className="navbar"
+        style={{
+          background: 'linear-gradient(90deg, $blue-color, $darker-blue-color',
+        }}
+      >
         <div className="logo">
           <Link to="/">Cellphone Repairs</Link>
         </div>
@@ -64,7 +69,7 @@ function Navbar(props) {
             user !== undefined &&
             user.role === 'Customer' && (
               <li className="nav-link">
-                <Link to="/requests">My Requests</Link>
+                <a href="/requests">My Requests</a>
               </li>
             )}
           {authenticated === true &&

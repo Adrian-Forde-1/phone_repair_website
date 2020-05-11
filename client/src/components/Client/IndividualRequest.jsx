@@ -8,7 +8,7 @@ function IndividualRequest(props) {
         headers: { Authorization: localStorage.getItem('token') },
       })
       .then(() => {
-        history.push('/requests');
+        history.goBack();
       });
   };
 
