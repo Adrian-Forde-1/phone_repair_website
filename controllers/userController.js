@@ -6,7 +6,6 @@ const User = require('../models/UserModel');
 const Request = require('../models/RequestModel');
 const TypeOfRepair = require('../models/TypeOfRepairModel');
 const Device = require('../models/DeviceModel');
-const { jwt_secret } = require('../configuration/config');
 
 const isEmpty = (string) => {
   if (string.trim() === '') return true;
@@ -27,7 +26,7 @@ const signToken = (user) => {
       iat: new Date().getTime(),
       exp: new Date().setDate(new Date().getDate() + 1),
     },
-    jwt_secret
+    process.env.jwt_secret
   );
 };
 

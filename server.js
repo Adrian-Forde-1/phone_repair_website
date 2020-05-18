@@ -6,7 +6,6 @@ const session = require('express-session');
 const morgan = require('morgan');
 const cors = require('cors');
 const path = require('path');
-const { MongoUri, session_secret } = require('./configuration/config');
 
 dotenv.config();
 
@@ -19,7 +18,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(
   session({
-    secret: session_secret,
+    secret: process.env.session_secret,
     saveUninitialized: true,
     resave: true,
   })
@@ -28,7 +27,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 //
 mongoose
-  .connect(MongoUri, {
+  .connect(process.env.MongoUri, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: false,
