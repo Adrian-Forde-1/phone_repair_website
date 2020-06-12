@@ -4,7 +4,6 @@ import React from 'react';
 import { Link, withRouter } from 'react-router-dom';
 
 function UserPreview(props) {
-  console.log(props);
   return (
     <div className="user-preview">
       <Link to={`/admin/user/${props.user._id}`}>
