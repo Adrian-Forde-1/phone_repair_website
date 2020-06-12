@@ -13,27 +13,19 @@ import { logoutUser } from '../redux/actions/userActions';
 
 function Navbar(props) {
   useEffect(() => {
-    console.log(props.history.location.pathname);
-    if (
-      props.history.location.pathname.toString() === '/' ||
-      props.history.location.pathname.toString() === '/request'
-    ) {
+    if (document.querySelector('.navbar')) {
       document.querySelector('.navbar').style.background = 'transparent';
     }
-    // else {
-    //   document.querySelector('.navbar').style.background =
-    //     'linear-gradient(90deg, $blue-color, $darker-blue-color)';
-    // }
-    // if (
-    //   (props.location.pathname !== '/' &&
-    //    props.history.location.pathname.indexOf('admin') > -1) ||
-    //   (props.location.pathname !== '/' &&
-    //    props.history.location.pathname.indexOf('dashboard') > -1)
-    // ) {
-    //   document.querySelector('.navbar').style.background =
-    //     'linear-gradient(90deg, #14cca7, #212d9a)';
-    // }
-  }, [props.history.location.pathname]);
+    if (props.authenticated === true) {
+      if (props.user.role === 'Customer') {
+        if (window.location.pathname.toString().indexOf('requests') > -1) {
+          document.querySelector('.navbar').style.background = '#14cca7';
+        } else {
+          document.querySelector('.navbar').style.background = 'transparent';
+        }
+      }
+    }
+  }, [window.location.pathname]);
   const { user, authenticated } = props;
 
   if (props.history.location.pathname.indexOf('admin') <= -1) {
