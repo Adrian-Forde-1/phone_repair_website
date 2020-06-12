@@ -41,7 +41,7 @@ class AllDevices extends Component {
     return (
       <div className="admin-info-div">
         <AdminSideBar />
-        <form className="search-bar no-select">
+        <form className="search-bar admin-search no-select">
           <input
             type="text"
             name="search"

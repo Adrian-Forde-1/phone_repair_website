@@ -45,7 +45,14 @@ class AllUsers extends Component {
     return (
       <div className="admin-info-div">
         <AdminSideBar />
-        <SearchBar onChange={this.onChange} />
+        <form className="search-bar admin-search no-select">
+          <input
+            type="text"
+            name="search"
+            placeholder="Search by device's name"
+            onChange={this.onChange}
+          />
+        </form>
         {this.props.users ? (
           <div className="user-preview-container">
             {this.props.users.map((user) =>
